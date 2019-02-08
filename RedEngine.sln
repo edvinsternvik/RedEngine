@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RedEngine", "RedEngine\RedEngine.vcxproj", "{C6FCA7A2-00D8-4727-AE52-AA0B0264026F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C6FCA7A2-00D8-4727-AE52-AA0B0264026F}.Debug|x64.ActiveCfg = Debug|x64
+		{C6FCA7A2-00D8-4727-AE52-AA0B0264026F}.Debug|x64.Build.0 = Debug|x64
+		{C6FCA7A2-00D8-4727-AE52-AA0B0264026F}.Release|x64.ActiveCfg = Release|x64
+		{C6FCA7A2-00D8-4727-AE52-AA0B0264026F}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC4FBE25-8E1D-4EE7-874C-33305C6E9E31}
+	EndGlobalSection
+EndGlobal
