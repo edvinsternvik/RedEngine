@@ -13,7 +13,7 @@ private:
 	VertexBuffer* m_vbo;
 	IndexBuffer* m_ibo;
 public:
-	Model();
+	Model(const char* modelPath);
 	~Model();
 
 	inline unsigned int getIndexCount() { return m_indicies; }

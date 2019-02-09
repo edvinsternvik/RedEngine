@@ -14,6 +14,7 @@ public:
 
 	void useShader();
 	void setUniformMat4f(int uniformLocation, float* mat4);
+	void setUniformVec3f(int uniformLocation, float* vec3);
 	int getUniformLocation(const char* uniformName);
 	inline int const getProjectionUniformLocation() const { return m_projectionUniformLocation; }
 	inline int const getModelUniformLocation() const { return m_modelUniformLocation; }
@@ -21,6 +22,7 @@ public:
 private:
 	unsigned int compileShader(GLenum shaderType, const char* shaderSource);
 	unsigned int createShaderProgram(unsigned int vertexShaderID, unsigned int fragmentShaderID);
+	void parseShader(const char* shaderSource, std::string* vertexShaderSource, std::string* fragmentShaderSource);
 	void checkForShaderError(unsigned int shaderID);
 	void checkForProgramError(unsigned int programID);
 };

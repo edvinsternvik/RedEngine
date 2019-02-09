@@ -85,6 +85,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="src\TestFile.txt" />
+    <None Include="shaders\StandardShader.shader" />
   </ItemGroup>
 </Project>

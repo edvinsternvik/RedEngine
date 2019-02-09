@@ -1,7 +1,7 @@
 #include "Model.h"
 
-Model::Model() : m_modelData() {
-	objReader::parseObjFile("src/TestFile.txt", &m_modelData);
+Model::Model(const char* modelPath) : m_modelData() {
+	objReader::parseObjFile(modelPath, &m_modelData);
 	m_indicies = m_modelData.indexData.size();
 
 	m_vao = new VertexArrayObject();

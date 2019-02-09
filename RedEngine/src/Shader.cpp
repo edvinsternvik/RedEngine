@@ -1,33 +1,14 @@
 #include "Shader.h"
+#include <fstream>
+#include <sstream>
 
 Shader::Shader() {
 
-	const char* vertShaderSource =
-		"#version 330 core\n"
-		"\n"
-		"layout(location = 0) in vec3 aPos;\n"
-		"\n"
-		"uniform mat4 projMat;\n"
-		"uniform mat4 modelMat;\n"
-		"uniform mat4 viewMat;\n"
-		"\n"
-		"void main() {\n"
-		"	vec4 vertPos = projMat * viewMat * modelMat * vec4(aPos, 1.0);\n"
-		"	gl_Position = vertPos;\n"
-		"}";
+	std::string vertShaderSource, fragShaderSource;
+	parseShader("shaders/StandardShader.shader", &vertShaderSource, &fragShaderSource);
 
-	unsigned int vertexShader = compileShader(GL_VERTEX_SHADER, vertShaderSource);
-
-	const char* fragShaderSource =
-		"#version 330 core\n"
-		"\n"
-		"out vec4 FragColor;\n"
-		"\n"
-		"void main() {\n"
-		"	FragColor = vec4(1.0f, 0.0f, 0.0f, 1.0f);\n"
-		"}\n";
-
-	unsigned int fragmentShader = compileShader(GL_FRAGMENT_SHADER, fragShaderSource);
+	unsigned int vertexShader = compileShader(GL_VERTEX_SHADER, vertShaderSource.c_str());
+	unsigned int fragmentShader = compileShader(GL_FRAGMENT_SHADER, fragShaderSource.c_str());
 	m_programID = createShaderProgram(vertexShader, fragmentShader);
 
 	useShader();
@@ -46,6 +27,10 @@ void Shader::useShader() {
 
 void Shader::setUniformMat4f(int uniformLocation, float * mat4) {
 	glDebug(glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, mat4));
+}
+
+void Shader::setUniformVec3f(int uniformLocation, float * vec3) {
+	glDebug(glUniform3fv(uniformLocation, 1, vec3));
 }
 
 int Shader::getUniformLocation(const char * uniformName) {
@@ -74,6 +59,35 @@ unsigned int Shader::createShaderProgram(unsigned int vertexShaderID, unsigned i
 	checkForProgramError(shaderProgram);
 
 	return shaderProgram;
+}
+
+void Shader::parseShader(const char* shaderPath, std::string * vertexShaderSource, std::string* fragmentShaderSource) {
+	std::ifstream ifs(shaderPath);
+	std::stringstream vertexStringstream, fragmentStringstream;
+	std::string line;
+	int shaderType = 0; //0:none, 1:vertex, 2:fragment
+	if (ifs.is_open()) {
+		while (std::getline(ifs, line)) {
+			if (line[0] == '/' && line[1] == '/') {
+				if (line.find("VERTEX SHADER") != std::string::npos) { shaderType = 1; }
+				if (line.find("FRAGMENT SHADER") != std::string::npos) { shaderType = 2; }
+			}
+			else {
+				if (shaderType == 1) {
+					vertexStringstream << line << '\n';
+				}
+				else if (shaderType == 2) {
+					fragmentStringstream << line << '\n';
+				}
+			}
+		}
+		*vertexShaderSource = vertexStringstream.str();
+		*fragmentShaderSource = fragmentStringstream.str();
+	}
+	else {
+		std::cout << "Could not open file" << std::endl;
+	}
+	
 }
 
 void Shader::checkForShaderError(unsigned int shaderID) {
