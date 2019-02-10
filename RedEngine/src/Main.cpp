@@ -9,6 +9,8 @@
 #include "Renderer.h"
 #include "Camera.h"
 
+#include <chrono>
+
 glm::vec3 pos = glm::vec3(0.0f);
 bool pressedKeys[4];
 	
@@ -80,27 +82,29 @@ int main(void)
 	int lightPosUniformLocation = shader.getUniformLocation("lightPos");
 	glm::vec3 lPos(-4.0f, 3.0f, 1.0f);
 	shader.setUniformVec3f(lightPosUniformLocation, &lPos[0]);
+	
+	Model m("models/lowPolyIsland.obj");
+	GameObject* go = gameObjectManager.createGameObject(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f), &m);
 
-	Model m("models/cube.obj");
-	GameObject* go = gameObjectManager.createGameObject(glm::vec3(0.0f, -2.0f, 0.0f), glm::vec3(0.0f), &m);
-
-	/*std::chrono::high_resolution_clock timer;
+	std::chrono::high_resolution_clock timer;
 	auto start = timer.now();
 	auto stop = timer.now();
 	int frameCounter = 0;
-	double timeCounter = 0.0f;*/
+	double timeCounter = 0.0f;
 
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 	glFrontFace(GL_CCW);
 
+	glEnable(GL_DEPTH_TEST);
+
 	/* Loop until the user closes the window */
 	while (!glfwWindowShouldClose(window))
 	{
 		/* Render here */
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		/*stop = timer.now();
+		stop = timer.now();
 		double deltaTime = std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count();
 		frameCounter++;
 		timeCounter += deltaTime;
@@ -110,15 +114,14 @@ int main(void)
 			timeCounter = 0;
 
 		}
-		start = timer.now();*/
-
+		start = timer.now();
 
 		if (pressedKeys[0]) pos.z-=.001f;
 		if (pressedKeys[1]) pos.x += .001f;
 		if (pressedKeys[2]) pos.z += .001f;
 		if (pressedKeys[3]) pos.x -= .001f;
 
-		go->rotate(glm::vec3(0.01f, 0.01f, 0.01f));
+		//go->rotate(glm::vec3(0.01f, 0.01f, 0.01f));
 		//go->move(glm::vec3(0.001f, 0.0f, 0.0f));
 		camera.setPosition(pos);
 		renderer.renderFrame();

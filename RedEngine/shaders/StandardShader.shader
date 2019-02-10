@@ -14,7 +14,7 @@ out vec3 normal;
 void main() {
 	gl_Position = projMat * viewMat * modelMat * vec4(aPos, 1.0);
 	fragPos = vec3(modelMat * vec4(aPos, 1.0));
-	normal = aNormals;
+	normal = mat3(transpose(inverse(modelMat))) * aNormals;
 }
 
 //FRAGMENT SHADER
