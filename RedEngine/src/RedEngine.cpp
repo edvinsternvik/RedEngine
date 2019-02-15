@@ -41,6 +41,8 @@ void RedEngine::loop() {
 
 		update();
 
+		m_window->resetMouseDelta();
+
 		m_renderer->renderFrame();
 
 		glfwSwapBuffers(m_window->getWindow());

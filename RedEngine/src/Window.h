@@ -28,4 +28,8 @@ public:
 	void setCusorEnabled(bool isEnabled);
 	friend void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 	friend void cursor_pos_callback(GLFWwindow* window, double xpos, double ypos);
+	
+	friend class RedEngine;
+private:
+	void resetMouseDelta();
 };
