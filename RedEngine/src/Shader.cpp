@@ -3,12 +3,12 @@
 #include <sstream>
 
 Shader::Shader() {
-
 	std::string vertShaderSource, fragShaderSource;
 	parseShader("shaders/StandardShader.shader", &vertShaderSource, &fragShaderSource);
 
 	unsigned int vertexShader = compileShader(GL_VERTEX_SHADER, vertShaderSource.c_str());
 	unsigned int fragmentShader = compileShader(GL_FRAGMENT_SHADER, fragShaderSource.c_str());
+
 	m_programID = createShaderProgram(vertexShader, fragmentShader);
 
 	useShader();

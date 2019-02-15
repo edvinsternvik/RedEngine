@@ -12,7 +12,10 @@ GameObject::~GameObject() {
 }
 
 void GameObject::move(glm::vec3 movement) {
-	m_position += movement;
+	glm::mat4 movementMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(-m_rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+	movementMatrix = glm::rotate(movementMatrix, glm::radians(-m_rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+	movementMatrix = glm::rotate(movementMatrix, glm::radians(-m_rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+	m_position += glm::mat3(movementMatrix) * movement;
 	setModelMat();
 }
 

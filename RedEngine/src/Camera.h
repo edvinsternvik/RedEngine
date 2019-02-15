@@ -12,7 +12,7 @@ private:
 	glm::mat4 m_projectionMat;
 	CameraType m_cameraType;
 public:
-	Camera(glm::vec3 pos, glm::vec3 rot, CameraType cameraType, glm::vec2& windowSize);
+	Camera(glm::vec3 pos, glm::vec3 rot, CameraType cameraType, glm::vec2 windowSize);
 	~Camera();
 
 
