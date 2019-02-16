@@ -45,6 +45,10 @@ void Window::setCusorEnabled(bool isEnabled) {
 	glfwSetInputMode(m_window, GLFW_CURSOR, flag);
 }
 
+void Window::enableVSync(bool enabled) {
+	glfwSwapInterval((int)enabled);
+}
+
 void Window::resetMouseDelta() {
 	m_lastXpos = m_xpos;
 	m_lastYpos = m_ypos;

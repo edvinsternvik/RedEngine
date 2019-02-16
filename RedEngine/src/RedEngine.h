@@ -6,6 +6,7 @@
 #include "GameObjectManager.h"
 #include "Renderer.h"
 #include "Camera.h"
+#include "Time.h"
 
 class RedEngine {
 private:
@@ -14,6 +15,7 @@ private:
 	Shader* m_shader;
 	GameObjectManager* m_gameObjectManager;
 	Renderer* m_renderer;
+	Time* m_time;
 public:
 	RedEngine();
 	~RedEngine();
@@ -24,6 +26,7 @@ public:
 	inline Window* const getWindow() const { return m_window; }
 	inline Camera* const getCamera() const { return m_camera; }
 	inline Shader* const getShader() const { return m_shader; }
+	inline Time* const getTime() const { return m_time;  }
 	inline GameObjectManager* const getGameObjectManager() const { return m_gameObjectManager; }
 	inline Renderer* const getRenderer() const { return m_renderer; }
 private:

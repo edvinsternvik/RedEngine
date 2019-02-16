@@ -6,27 +6,35 @@ public:
 
 	Model* m;
 	GameObject* go;
-	Camera* cam;
+	double timeCounter;
+	int frameCounter;
 
 	virtual void start() override {
 		m = new Model("models/lowPolyIsland.obj");
 		go = getGameObjectManager()->createGameObject(glm::vec3(0.0f, 0.0f, -10.0f), glm::vec3(0.0f), m);
-		cam = getCamera();
+		getWindow()->enableVSync(true);
 	}
 
 	virtual void update() override {
-		if (Window::INSTANCE->getKey(GLFW_KEY_W)) cam->move(glm::vec3(0.0f, 0.0f, -0.0005f));
-		if (Window::INSTANCE->getKey(GLFW_KEY_S)) cam->move(glm::vec3(0.0f, 0.0f,  0.0005f));
-		if (Window::INSTANCE->getKey(GLFW_KEY_A)) cam->move(glm::vec3(-0.0005f, 0.0f, 0.0f));
-		if (Window::INSTANCE->getKey(GLFW_KEY_D)) cam->move(glm::vec3(0.0005f, 0.0f, 0.0f));
+		if (getWindow()->getKey(GLFW_KEY_ESCAPE)) glfwSetWindowShouldClose(Window::INSTANCE->getWindow(), true);
+
+		float walkingSpeed = getTime()->getDeltaTime() * 2.0f;
+		if (getWindow()->getKey(GLFW_KEY_W)) getCamera()->move(glm::vec3(0.0f, 0.0f, -walkingSpeed));
+		if (getWindow()->getKey(GLFW_KEY_S)) getCamera()->move(glm::vec3(0.0f, 0.0f,  walkingSpeed));
+		if (getWindow()->getKey(GLFW_KEY_A)) getCamera()->move(glm::vec3(-walkingSpeed, 0.0f, 0.0f));
+		if (getWindow()->getKey(GLFW_KEY_D)) getCamera()->move(glm::vec3(walkingSpeed, 0.0f, 0.0f));
 
 		double xpos, ypos;
-		Window::INSTANCE->getMouseDelta(xpos, ypos);
-		cam->rotate(glm::vec3(0.0f, xpos * 0.03f, 0.0f));
+		getWindow()->getMouseDelta(xpos, ypos);
+		getCamera()->rotate(glm::vec3(0.0f, xpos * 0.03f, 0.0f));
 
-		if (Window::INSTANCE->getKey(GLFW_KEY_ESCAPE)) glfwSetWindowShouldClose(Window::INSTANCE->getWindow(), true);
+		/*timeCounter += getTime()->getDeltaTime();
+		frameCounter++;
+		if (timeCounter > 1.0) {
+			timeCounter--;
+			frameCounter = 0;
+		}*/
 	}
-
 };
 
 int main() {

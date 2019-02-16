@@ -10,6 +10,7 @@ RedEngine::~RedEngine() {
 	delete m_shader;
 	delete m_gameObjectManager;
 	delete m_renderer;
+	delete m_time;
 }
 
 void RedEngine::init(int width, int height, const char* title, bool enableCursor) {
@@ -29,6 +30,7 @@ void RedEngine::init(int width, int height, const char* title, bool enableCursor
 	m_shader = new Shader;
 	m_gameObjectManager = new GameObjectManager;
 	m_renderer = new Renderer(m_camera, m_gameObjectManager, m_shader);
+	m_time = new Time;
 
 	start();
 
@@ -39,6 +41,8 @@ void RedEngine::loop() {
 	while (!glfwWindowShouldClose(m_window->getWindow())) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		m_time->updateDeltaTime();
+		
 		update();
 
 		m_window->resetMouseDelta();

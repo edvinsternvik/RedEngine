@@ -26,6 +26,7 @@ public:
 	void getMousePos(double& xpos, double& ypos);
 	void getMouseDelta(double& xpos, double& ypos);
 	void setCusorEnabled(bool isEnabled);
+	void enableVSync(bool enabled);
 	friend void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 	friend void cursor_pos_callback(GLFWwindow* window, double xpos, double ypos);
 	
