@@ -4,7 +4,7 @@
 
 Shader::Shader() {
 	std::string vertShaderSource, fragShaderSource;
-	parseShader("shaders/StandardShader.shader", &vertShaderSource, &fragShaderSource);
+	parseShader("assets/shaders/StandardShader.shader", &vertShaderSource, &fragShaderSource);
 
 	unsigned int vertexShader = compileShader(GL_VERTEX_SHADER, vertShaderSource.c_str());
 	unsigned int fragmentShader = compileShader(GL_FRAGMENT_SHADER, fragShaderSource.c_str());
@@ -23,6 +23,10 @@ Shader::~Shader() {
 
 void Shader::useShader() {
 	glDebug(glUseProgram(m_programID));
+}
+
+void Shader::setUniform1i(int uniformLocation, int value) {
+	glDebug(glUniform1i(uniformLocation, value));
 }
 
 void Shader::setUniformMat4f(int uniformLocation, float * mat4) {

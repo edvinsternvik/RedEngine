@@ -7,6 +7,7 @@
 #include "Renderer.h"
 #include "Camera.h"
 #include "Time.h"
+#include "Texture.h"
 
 class RedEngine {
 private:

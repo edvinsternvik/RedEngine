@@ -13,6 +13,7 @@ public:
 	~Shader();
 
 	void useShader();
+	void setUniform1i(int uniformLocation, int value);
 	void setUniformMat4f(int uniformLocation, float* mat4);
 	void setUniformVec3f(int uniformLocation, float* vec3);
 	int getUniformLocation(const char* uniformName);

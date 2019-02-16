@@ -26,6 +26,9 @@ void RedEngine::init(int width, int height, const char* title, bool enableCursor
 
 	glEnable(GL_DEPTH_TEST);
 
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
 	m_camera = new Camera(glm::vec3(0.0f), glm::vec3(0.0f), CameraType::Perspective, glm::vec2(m_window->getWidth(), m_window->getHeight()));
 	m_shader = new Shader;
 	m_gameObjectManager = new GameObjectManager;

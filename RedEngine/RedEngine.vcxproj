@@ -49,7 +49,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)RedEngine\vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)RedEngine\vendor\glm;$(SolutionDir)RedEngine\vendor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>GAME_DEBUG;GLEW_STATIC;_MBCS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -111,6 +111,8 @@
     <ClCompile Include="src\VertexBuffer.cpp" />
     <ClCompile Include="src\Window.cpp" />
     <ClCompile Include="src\Time.cpp" />
+    <ClCompile Include="src\Texture.cpp" />
+    <ClCompile Include="vendor\stb_image\stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Camera.h" />
@@ -127,6 +129,8 @@
     <ClInclude Include="src\VertexBuffer.h" />
     <ClInclude Include="src\Window.h" />
     <ClInclude Include="src\Time.h" />
+    <ClInclude Include="src\Texture.h" />
+    <ClInclude Include="vendor\stb_image\stb_image.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
