@@ -8,6 +8,8 @@ private:
 	int m_projectionUniformLocation;
 	int m_modelUniformLocation;
 	int m_viewUniformLocation;
+	int m_lightUniformLocation;
+	int m_textureUniformLocation;
 public:
 	Shader();
 	~Shader();
@@ -20,6 +22,7 @@ public:
 	inline int const getProjectionUniformLocation() const { return m_projectionUniformLocation; }
 	inline int const getModelUniformLocation() const { return m_modelUniformLocation; }
 	inline int const getViewUniformLocation() const { return m_viewUniformLocation; }
+	inline int const getLightUniformLocation() const { return m_lightUniformLocation; }
 private:
 	unsigned int compileShader(GLenum shaderType, const char* shaderSource);
 	unsigned int createShaderProgram(unsigned int vertexShaderID, unsigned int fragmentShaderID);

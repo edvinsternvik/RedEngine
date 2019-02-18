@@ -30,10 +30,10 @@ in vec3 normal;
 in vec2 texCoords;
 
 uniform vec3 lightPos;
-uniform sampler2D u_Texture;
+uniform sampler2D u_texture;
 
 void main() {
-	vec4 texColor = texture(u_Texture, texCoords);
+	vec4 texColor = texture(u_texture, texCoords);
 
 	vec3 norm = normalize(normal);
 	vec3 lightDir = normalize(lightPos - fragPos);

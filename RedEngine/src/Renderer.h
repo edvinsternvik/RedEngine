@@ -15,4 +15,5 @@ public:
 	void renderFrame();
 private:
 	void renderGameObject(GameObject* gameObject);
+	void updateLightPositions();
 };

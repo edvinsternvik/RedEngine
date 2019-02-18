@@ -22,6 +22,7 @@ Window::Window(int width, int height, const char * title, bool enableCursor) : m
 	glfwSetCursorPosCallback(m_window, cursor_pos_callback);
 
 	setCusorEnabled(enableCursor);
+	m_isCursorEnabled = enableCursor;
 
 	glfwMakeContextCurrent(m_window);
 }
@@ -43,15 +44,18 @@ void Window::getMouseDelta(double & xpos, double & ypos) {
 void Window::setCusorEnabled(bool isEnabled) {
 	int flag = isEnabled ? GLFW_CURSOR_NORMAL : GLFW_CURSOR_DISABLED;
 	glfwSetInputMode(m_window, GLFW_CURSOR, flag);
+	m_isCursorEnabled = isEnabled;
 }
 
 void Window::enableVSync(bool enabled) {
 	glfwSwapInterval((int)enabled);
 }
 
-void Window::resetMouseDelta() {
+void Window::updateInput() {
 	m_lastXpos = m_xpos;
 	m_lastYpos = m_ypos;
+
+	std::copy(std::begin(m_keys), std::end(m_keys), std::begin(m_keysLast));
 }
 
 void key_callback(GLFWwindow * window, int key, int scancode, int action, int mods) {

@@ -4,6 +4,7 @@
 #include "VertexBuffer.h"
 #include "IndexBuffer.h"
 #include "ObjReader.h"
+#include "Texture.h"
 
 class Model {
 private:
@@ -12,9 +13,12 @@ private:
 	VertexArrayObject* m_vao;
 	VertexBuffer* m_vbo;
 	IndexBuffer* m_ibo;
+	Texture* m_texture;
 public:
-	Model(const char* modelPath);
+	Model(const char* modelPath, Texture* texture);
 	~Model();
 
-	inline unsigned int getIndexCount() { return m_indicies; }
+	void bind();
+	inline unsigned int getIndexCount() const { return m_indicies; }
+	inline Texture* getTexture() const { return m_texture; }
 };

@@ -1,6 +1,6 @@
 #include "Model.h"
 
-Model::Model(const char* modelPath) : m_modelData() {
+Model::Model(const char* modelPath, Texture* texture) : m_modelData(), m_texture(texture) {
 	objReader::parseObjFile(modelPath, &m_modelData);
 	m_indicies = m_modelData.indexData.size();
 
@@ -16,4 +16,8 @@ Model::~Model() {
 	delete m_vbo;
 	delete m_ibo;
 	delete m_vao;
+}
+
+void Model::bind() {
+	m_vao->bind();
 }

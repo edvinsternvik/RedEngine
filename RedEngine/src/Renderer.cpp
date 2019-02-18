@@ -1,13 +1,13 @@
 #include "Renderer.h"
 
 Renderer::Renderer(Camera * camera, GameObjectManager * gameObjectManager, Shader * shader) : m_camera(camera), m_gameObjectManager(gameObjectManager), m_shader(shader) {
-
 }
 
 Renderer::~Renderer() {
 }
 
 void Renderer::renderFrame() {
+	updateLightPositions();
 	m_shader->setUniformMat4f(m_shader->getProjectionUniformLocation(), &(*m_camera->getProjectionMat())[0][0]);
 	m_shader->setUniformMat4f(m_shader->getViewUniformLocation(), &(*m_camera->getViewMat())[0][0]);
 
@@ -16,8 +16,19 @@ void Renderer::renderFrame() {
 	}
 }
 
+
 void Renderer::renderGameObject(GameObject* gameObject) {
+	gameObject->getModel()->bind();
+	gameObject->getModel()->getTexture()->bind(0);
 	m_shader->setUniformMat4f(m_shader->getModelUniformLocation(), &(*gameObject->getModelMat())[0][0]);
 
 	glDebug(glDrawElements(GL_TRIANGLES, gameObject->getModel()->getIndexCount(), GL_UNSIGNED_INT, nullptr));
+}
+
+void Renderer::updateLightPositions() {
+	auto lList = m_gameObjectManager->getLightList();
+	for (int i = 0; i < lList->size(); i++) {
+		glm::vec3* test = (*lList)[i]->getPosition();
+		m_shader->setUniformVec3f(m_shader->getLightUniformLocation(), &(*test)[0]);
+	}
 }

@@ -1,6 +1,10 @@
 #include "RedEngine.h"
 #include "Debug.h"
 
+#include <imgui\imgui.h>
+#include <imgui\imgui_impl_glfw.h>
+#include <imgui\imgui_impl_opengl3.h>
+
 RedEngine::RedEngine() {
 }
 
@@ -16,6 +20,13 @@ RedEngine::~RedEngine() {
 void RedEngine::init(int width, int height, const char* title, bool enableCursor) {
 	m_window = new Window(width, height, title, enableCursor);
 	
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+
+	ImGui::StyleColorsDark();
+	ImGui_ImplGlfw_InitForOpenGL(getWindow()->getWindow(), true);
+	ImGui_ImplOpenGL3_Init("#version 130");
+
 	if (glewInit() != GLEW_OK) {
 		std::cout << "GLEW INIT FAILED" << std::endl;
 	}
@@ -48,9 +59,22 @@ void RedEngine::loop() {
 		
 		update();
 
-		m_window->resetMouseDelta();
+		m_window->updateInput();
+
+		ImGui_ImplOpenGL3_NewFrame();
+		ImGui_ImplGlfw_NewFrame();
+		ImGui::NewFrame();
+
+		ImGui::Begin("hello");
+		ImGui::Text("hello there");
+		ImGui::End();
+
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
 		m_renderer->renderFrame();
+
+		render();
 
 		glfwSwapBuffers(m_window->getWindow());
 		glfwPollEvents();

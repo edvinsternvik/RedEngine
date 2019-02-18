@@ -16,6 +16,9 @@ Shader::Shader() {
 	m_projectionUniformLocation = getUniformLocation("projMat");
 	m_modelUniformLocation = getUniformLocation("modelMat");
 	m_viewUniformLocation = getUniformLocation("viewMat");
+	m_lightUniformLocation = getUniformLocation("lightPos");
+	m_textureUniformLocation = getUniformLocation("u_texture");
+	setUniform1i(m_textureUniformLocation, 0);
 }
 
 Shader::~Shader() {

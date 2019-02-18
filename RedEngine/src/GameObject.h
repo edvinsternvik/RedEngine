@@ -2,6 +2,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include "Model.h"
+#include "Texture.h"
 #include <iostream>
 
 class GameObject {

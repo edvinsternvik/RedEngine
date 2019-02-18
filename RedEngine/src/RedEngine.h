@@ -7,7 +7,6 @@
 #include "Renderer.h"
 #include "Camera.h"
 #include "Time.h"
-#include "Texture.h"
 
 class RedEngine {
 private:
@@ -24,6 +23,7 @@ public:
 	void init(int width, int height, const char* title, bool enableCursor);
 	virtual void start() = 0;
 	virtual void update() = 0;
+	virtual void render() = 0;
 	inline Window* const getWindow() const { return m_window; }
 	inline Camera* const getCamera() const { return m_camera; }
 	inline Shader* const getShader() const { return m_shader; }
