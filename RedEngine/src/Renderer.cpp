@@ -26,9 +26,14 @@ void Renderer::renderGameObject(GameObject* gameObject) {
 }
 
 void Renderer::updateLightPositions() {
+	std::vector<glm::vec3> tempList;
 	auto lList = m_gameObjectManager->getLightList();
 	for (int i = 0; i < lList->size(); i++) {
-		glm::vec3* test = (*lList)[i]->getPosition();
-		m_shader->setUniformVec3f(m_shader->getLightUniformLocation(), &(*test)[0]);
+		glm::vec3* test = (*lList)[0]->getPosition();
+		tempList.push_back(*test);
 	}
+	if (tempList.size() == 0) tempList.push_back(glm::vec3(0.0f));
+
+	m_shader->setUniform1i(m_shader->getLightCountUniformLocation(), lList->size());
+	m_shader->setUniformVec3f(m_shader->getLightPosUniformLocation(), &((tempList[0])[0]));
 }

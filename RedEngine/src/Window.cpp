@@ -6,7 +6,7 @@ void cursor_pos_callback(GLFWwindow * window, double xpos, double ypos);
 
 Window* Window::INSTANCE = nullptr;
 
-Window::Window(int width, int height, const char * title, bool enableCursor) : m_width(width), m_height(height) {
+Window::Window(int width, int height, const char * title) : m_width(width), m_height(height) {
 
 	Window::INSTANCE = this;
 
@@ -21,8 +21,8 @@ Window::Window(int width, int height, const char * title, bool enableCursor) : m
 	glfwSetKeyCallback(m_window, key_callback);
 	glfwSetCursorPosCallback(m_window, cursor_pos_callback);
 
-	setCusorEnabled(enableCursor);
-	m_isCursorEnabled = enableCursor;
+	setCusorEnabled(true);
+	m_isCursorEnabled = true;
 
 	glfwMakeContextCurrent(m_window);
 }

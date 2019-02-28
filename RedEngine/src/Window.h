@@ -18,7 +18,7 @@ private:
 	double m_xpos, m_ypos, m_lastXpos, m_lastYpos;
 	bool m_isCursorEnabled;
 public:
-	Window(int width, int height, const char* title, bool enableCursor);
+	Window(int width, int height, const char* title);
 	~Window();
 
 	inline GLFWwindow* getWindow() const { return m_window; }

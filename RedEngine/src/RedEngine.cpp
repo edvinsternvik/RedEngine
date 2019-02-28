@@ -17,8 +17,8 @@ RedEngine::~RedEngine() {
 	delete m_time;
 }
 
-void RedEngine::init(int width, int height, const char* title, bool enableCursor) {
-	m_window = new Window(width, height, title, enableCursor);
+void RedEngine::init(int width, int height, const char* title, CameraType cameraType) {
+	m_window = new Window(width, height, title);
 	
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
@@ -40,7 +40,7 @@ void RedEngine::init(int width, int height, const char* title, bool enableCursor
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	m_camera = new Camera(glm::vec3(0.0f), glm::vec3(0.0f), CameraType::Perspective, glm::vec2(m_window->getWidth(), m_window->getHeight()));
+	m_camera = new Camera(glm::vec3(0.0f), glm::vec3(0.0f), cameraType, glm::vec2(m_window->getWidth(), m_window->getHeight()));
 	m_shader = new Shader;
 	m_gameObjectManager = new GameObjectManager;
 	m_renderer = new Renderer(m_camera, m_gameObjectManager, m_shader);
@@ -48,6 +48,7 @@ void RedEngine::init(int width, int height, const char* title, bool enableCursor
 
 	start();
 
+	glClearColor(0.26f, 0.69f, 1.0f, 1.0f);
 	loop();
 }
 
@@ -61,6 +62,8 @@ void RedEngine::loop() {
 
 		m_window->updateInput();
 
+		m_renderer->renderFrame();
+
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
@@ -71,8 +74,6 @@ void RedEngine::loop() {
 
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-		m_renderer->renderFrame();
 
 		render();
 

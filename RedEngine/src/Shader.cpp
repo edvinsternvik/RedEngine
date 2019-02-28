@@ -16,7 +16,8 @@ Shader::Shader() {
 	m_projectionUniformLocation = getUniformLocation("projMat");
 	m_modelUniformLocation = getUniformLocation("modelMat");
 	m_viewUniformLocation = getUniformLocation("viewMat");
-	m_lightUniformLocation = getUniformLocation("lightPos");
+	m_lightPosUniformLocation = getUniformLocation("lightPos");
+	m_lightCountUniformLocation = getUniformLocation("lightCount");
 	m_textureUniformLocation = getUniformLocation("u_texture");
 	setUniform1i(m_textureUniformLocation, 0);
 }
@@ -29,15 +30,19 @@ void Shader::useShader() {
 }
 
 void Shader::setUniform1i(int uniformLocation, int value) {
-	glDebug(glUniform1i(uniformLocation, value));
+	glDebug(if (uniformLocation > -1) glUniform1i(uniformLocation, value));
 }
 
 void Shader::setUniformMat4f(int uniformLocation, float * mat4) {
-	glDebug(glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, mat4));
+	glDebug(if(uniformLocation > -1) glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, mat4));
 }
 
 void Shader::setUniformVec3f(int uniformLocation, float * vec3) {
-	glDebug(glUniform3fv(uniformLocation, 1, vec3));
+	glDebug(if (uniformLocation > -1) glUniform3fv(uniformLocation, 1, vec3));
+}
+
+void Shader::setUniformVec3fArray(int uniformLocation, float * arrayPointer, unsigned int vec3Count) {
+	glDebug(if (uniformLocation > -1) glUniform3fv(uniformLocation, vec3Count, arrayPointer));
 }
 
 int Shader::getUniformLocation(const char * uniformName) {

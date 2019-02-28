@@ -29,20 +29,10 @@ in vec3 fragPos;
 in vec3 normal;
 in vec2 texCoords;
 
-uniform vec3 lightPos[32];
-uniform int lightCount;
 uniform sampler2D u_texture;
 
 void main() {
 	vec4 texColor = texture(u_texture, texCoords);
 
-	vec3 norm = normalize(normal);
-	float diff = 0;
-	for (int i = 0; i < min(lightCount, 32); i++) {
-		vec3 lightDir = normalize(lightPos[i] - fragPos);
-		diff += max(dot(norm, lightDir), 0.0);
-	}
-	vec3 diffuse = diff * vec3(0.5, 0.5, 0.5);
-
-	FragColor = texColor * vec4(diffuse + 0.1, 1.0);
+	FragColor = texColor;
 }

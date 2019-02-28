@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RedEngine", "RedEngine\RedE
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RedGame", "RedGame\RedGame.vcxproj", "{C117AF00-548E-425C-BD68-90CA2C40B09B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Red2dGame", "Red2dGame\Red2dGame.vcxproj", "{7A52BAC0-E1B3-41DA-BEB3-E47E0948EC62}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -29,6 +31,14 @@ Global
 		{C117AF00-548E-425C-BD68-90CA2C40B09B}.Release|x64.Build.0 = Release|x64
 		{C117AF00-548E-425C-BD68-90CA2C40B09B}.Release|x86.ActiveCfg = Release|Win32
 		{C117AF00-548E-425C-BD68-90CA2C40B09B}.Release|x86.Build.0 = Release|Win32
+		{7A52BAC0-E1B3-41DA-BEB3-E47E0948EC62}.Debug|x64.ActiveCfg = Debug|x64
+		{7A52BAC0-E1B3-41DA-BEB3-E47E0948EC62}.Debug|x64.Build.0 = Debug|x64
+		{7A52BAC0-E1B3-41DA-BEB3-E47E0948EC62}.Debug|x86.ActiveCfg = Debug|Win32
+		{7A52BAC0-E1B3-41DA-BEB3-E47E0948EC62}.Debug|x86.Build.0 = Debug|Win32
+		{7A52BAC0-E1B3-41DA-BEB3-E47E0948EC62}.Release|x64.ActiveCfg = Release|x64
+		{7A52BAC0-E1B3-41DA-BEB3-E47E0948EC62}.Release|x64.Build.0 = Release|x64
+		{7A52BAC0-E1B3-41DA-BEB3-E47E0948EC62}.Release|x86.ActiveCfg = Release|Win32
+		{7A52BAC0-E1B3-41DA-BEB3-E47E0948EC62}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

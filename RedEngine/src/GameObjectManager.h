@@ -14,7 +14,7 @@ public:
 	~GameObjectManager();
 
 	GameObject* createGameObject(glm::vec3 pos, glm::vec3 rot);
-	GameObject* createGameObject(glm::vec3 pos, glm::vec3 rot, Model* model);
+	GameObject* createGameObject(glm::vec3 pos, glm::vec3 size, glm::vec3 rot, Model* model);
 	Light* createLight(glm::vec3 pos);
 	Light* createLight(glm::vec3 pos, Model* model);
 	inline const std::vector<GameObject*>* getGameObjectList() const { return &m_gameObjectList; };

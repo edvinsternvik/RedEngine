@@ -6,18 +6,23 @@ public:
 	using RedEngine::RedEngine;
 
 	Model* m;
+	Model* m2;
 	GameObject* go;
 	Texture* tex;
 	double timeCounter;
 	int frameCounter;
+	float y;
 
 	virtual void start() override {
 		getWindow()->enableVSync(true);
+		getWindow()->setCusorEnabled(false);
 
 		tex = new Texture("assets/img/lowPolyIslandTexture.png");
 		m = new Model("assets/models/lowPolyIsland2.obj", tex);
-		go = getGameObjectManager()->createGameObject(glm::vec3(0.0f, -2.0f, 0.0f), glm::vec3(0.0f), m);
-		getGameObjectManager()->createLight(glm::vec3(0.0f, 4.0f, 0.0f));
+		m2 = new Model("assets/models/cube.obj", tex);
+		go = getGameObjectManager()->createGameObject(glm::vec3(0.0f, -2.0f, 0.0f), glm::vec3(1.0f), glm::vec3(0.0f), m);
+		getGameObjectManager()->createLight(glm::vec3(0.0f, 20.0f, 0.0f));
+		getGameObjectManager()->createGameObject(glm::vec3(0.0f, 10.0f, 0.0f), glm::vec3(1.0f), glm::vec3(0.0f), m2);
 	}
 
 	virtual void update() override {
@@ -31,10 +36,11 @@ public:
 		if (getWindow()->getKeyDown(GLFW_KEY_Q)) getCamera()->move(glm::vec3(0.0f, -walkingSpeed, 0.0f));
 		if (getWindow()->getKeyDown(GLFW_KEY_E)) getCamera()->move(glm::vec3(0.0f, walkingSpeed, 0.0f));
 
-		double xpos, ypos;
-		getWindow()->getMouseDelta(xpos, ypos);
-		getCamera()->rotate(glm::vec3(0.0f, xpos * 0.03f, 0.0f));
-
+		if (!getWindow()->getCursorEnabled()) {
+			double xpos, ypos;
+			getWindow()->getMouseDelta(xpos, ypos);
+			getCamera()->rotate(glm::vec3(0.0f, xpos * 0.03f, 0.0f));
+		}
 		timeCounter += getTime()->getDeltaTime();
 		frameCounter++;
 		if (timeCounter > 1.0) {
@@ -52,7 +58,7 @@ public:
 int main() {
 	TestGame game;
 
-	game.init(1280, 720, "Hello there", false);
+	game.init(1280, 720, "Hello there", CameraType::Perspective);
 
 	game.start();
 }
