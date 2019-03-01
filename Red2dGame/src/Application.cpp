@@ -1,4 +1,5 @@
 #include <RedEngine.h>
+#include <Gui.h>
 
 class TestGame : public RedEngine {
 public:
@@ -11,9 +12,7 @@ public:
 	}
 
 	virtual void render() override {
-
 	}
-
 };
 
 int main() {

@@ -97,7 +97,7 @@ void Shader::parseShader(const char* shaderPath, std::string * vertexShaderSourc
 		*fragmentShaderSource = fragmentStringstream.str();
 	}
 	else {
-		std::cout << "Could not open file" << std::endl;
+		gameEngineDebug("Could not open shader file: " + (std::string)shaderPath);
 	}
 	
 }

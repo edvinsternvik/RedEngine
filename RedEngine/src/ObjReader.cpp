@@ -61,7 +61,7 @@ namespace objReader {
 			ifs.close();
 		}
 		else {
-			gameEngineDebug("COULD NOT OPEN FILE: " + filePath);
+			gameEngineDebug("COULD NOT OPEN MODEL FILE: " + filePath);
 		}
 	}
 }
