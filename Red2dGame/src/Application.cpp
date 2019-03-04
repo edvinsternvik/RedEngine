@@ -3,8 +3,6 @@
 
 class TestGame : public RedEngine {
 public:
-	using RedEngine::RedEngine;
-
 	virtual void start() override {
 	}
 
