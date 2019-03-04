@@ -164,5 +164,11 @@
     <ClInclude Include="src\Gui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Component.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Components\ObjectRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

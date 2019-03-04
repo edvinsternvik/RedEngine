@@ -9,7 +9,6 @@ public:
 	Texture* tex;
 	double timeCounter;
 	int frameCounter;
-	float y;
 
 	virtual void start() override {
 		getWindow()->enableVSync(true);
@@ -18,9 +17,9 @@ public:
 		tex = new Texture("assets/img/lowPolyIslandTexture.png");
 		m = new Model("assets/models/lowPolyIsland2.obj", tex);
 		m2 = new Model("assets/models/cube.obj", tex);
-		go = getGameObjectManager()->createGameObject(glm::vec3(0.0f, -2.0f, 0.0f), glm::vec3(1.0f), glm::vec3(0.0f), m);
+		go = getGameObjectManager()->createGameObject(glm::vec3(0.0f, -2.0f, 0.0f), glm::vec3(0.0f), glm::vec3(1.0f), m);
 		getGameObjectManager()->createLight(glm::vec3(0.0f, 20.0f, 0.0f));
-		getGameObjectManager()->createGameObject(glm::vec3(0.0f, 10.0f, 0.0f), glm::vec3(1.0f), glm::vec3(0.0f), m2);
+		getGameObjectManager()->createGameObject(glm::vec3(0.0f, 10.0f, 0.0f), glm::vec3(0.0f), glm::vec3(1.0f), m2);
 	}
 
 	virtual void update() override {

@@ -11,18 +11,17 @@ void Renderer::renderFrame() {
 	m_shader->setUniformMat4f(m_shader->getProjectionUniformLocation(), &(*m_camera->getProjectionMat())[0][0]);
 	m_shader->setUniformMat4f(m_shader->getViewUniformLocation(), &(*m_camera->getViewMat())[0][0]);
 
-	for (GameObject* go : *m_gameObjectManager->getGameObjectList()) {
-		renderGameObject(go);
+	for (ObjectRenderer* objRend : *m_gameObjectManager->getObjectRendererList()) {
+		renderGameObject(objRend);
 	}
 }
 
+void Renderer::renderGameObject(ObjectRenderer* objectRenderer) {
+	objectRenderer->getModel()->bind();
+	objectRenderer->getModel()->getTexture()->bind(0);
+	m_shader->setUniformMat4f(m_shader->getModelUniformLocation(), &(*objectRenderer->getParentGameObject()->getModelMat())[0][0]);
 
-void Renderer::renderGameObject(GameObject* gameObject) {
-	gameObject->getModel()->bind();
-	gameObject->getModel()->getTexture()->bind(0);
-	m_shader->setUniformMat4f(m_shader->getModelUniformLocation(), &(*gameObject->getModelMat())[0][0]);
-
-	glDebug(glDrawElements(GL_TRIANGLES, gameObject->getModel()->getIndexCount(), GL_UNSIGNED_INT, nullptr));
+	glDebug(glDrawElements(GL_TRIANGLES, objectRenderer->getModel()->getIndexCount(), GL_UNSIGNED_INT, nullptr));
 }
 
 void Renderer::updateLightPositions() {

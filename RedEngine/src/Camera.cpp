@@ -1,6 +1,6 @@
 #include "Camera.h"
 
-Camera::Camera(glm::vec3 pos, glm::vec3 rot, CameraType cameraType, glm::vec2 windowSize) : GameObject(pos, rot), m_cameraType(cameraType) {
+Camera::Camera(glm::vec3 pos, glm::vec3 rot, CameraType cameraType, glm::vec2 windowSize) : GameObject(pos, rot, glm::vec3(1.0f)), m_cameraType(cameraType) {
 	float aspectRatio = windowSize.x / windowSize.y;
 
 	if (m_cameraType == CameraType::Perspective) {
