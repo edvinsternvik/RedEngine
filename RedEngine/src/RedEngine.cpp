@@ -48,6 +48,11 @@ void RedEngine::loop() {
 		m_time->updateDeltaTime();
 		
 		update();
+		for (GameObject* go : *m_gameObjectManager->getGameObjectList()) {
+			for (Component* component : *go->getComponentList()) {
+				component->update();
+			}
+		}
 
 		m_window->updateInput();
 

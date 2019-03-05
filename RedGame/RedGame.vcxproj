@@ -138,6 +138,10 @@
       <Project>{c6fca7a2-00d8-4727-ae52-aa0b0264026f}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Components\CameraScript.h" />
+    <ClInclude Include="src\Components\TestComponent.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -21,6 +21,7 @@ public:
 	void rotate(glm::vec3 rotation);
 	void setRotation(glm::vec3 rotation);
 	Component* addComponent(Component* component);
+	inline std::vector<Component*>* getComponentList() { return &m_components; }
 	inline glm::vec3* const getPosition() { return &m_position; };
 	inline glm::vec3* const getSize() { return &m_size; };
 	inline glm::vec3* const getRotation() { return &m_rotation; }; 

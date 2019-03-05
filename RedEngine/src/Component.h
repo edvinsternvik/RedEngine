@@ -4,7 +4,7 @@
 class GameObject;
 
 class Component {
-protected:
+private:
 	GameObject* m_gameObject;
 public:
 	bool enabled = true;
