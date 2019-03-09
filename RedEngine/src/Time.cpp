@@ -1,11 +1,17 @@
 #include "Time.h"
 #include <iostream>
 
+Time* Time::instance = 0;
+
 Time::Time() : m_start(std::chrono::high_resolution_clock::now()) {
 }
 
+Time * Time::getInstance() {
+	if (instance == 0) {
+		instance = new Time();
+	}
 
-Time::~Time() {
+	return instance;
 }
 
 void Time::updateDeltaTime() {

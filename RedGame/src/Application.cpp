@@ -1,5 +1,6 @@
 #include <RedEngine.h>
 #include "Components\TestComponent.h"
+#include "Components\CameraScript.h"
 
 class TestGame : public RedEngine {
 public:
@@ -19,6 +20,7 @@ public:
 		m2 = new Model("assets/models/cube.obj", tex);
 		go = getGameObjectManager()->createGameObject(glm::vec3(0.0f, -2.0f, 0.0f), glm::vec3(0.0f), glm::vec3(1.0f), m);
 		go->addComponent(new TestComponent());
+		getCamera()->addComponent(new CameraScript);
 		getGameObjectManager()->createLight(glm::vec3(0.0f, 20.0f, 0.0f));
 		getGameObjectManager()->createGameObject(glm::vec3(0.0f, 10.0f, 0.0f), glm::vec3(0.0f), glm::vec3(1.0f), m2);
 	}

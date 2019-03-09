@@ -29,3 +29,9 @@ Light * GameObjectManager::createLight(glm::vec3 pos) {
 	m_lightList.push_back(new Light(pos));
 	return m_lightList.back();
 }
+
+Camera * GameObjectManager::createCamera(glm::vec3 pos, glm::vec3 rot, CameraType cameraType, glm::vec2 windowSize) {
+	Camera* camera = new Camera(pos, rot, cameraType, windowSize);
+	m_gameObjectList.push_back(camera);
+	return camera;
+}

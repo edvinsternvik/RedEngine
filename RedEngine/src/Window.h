@@ -5,9 +5,8 @@
 #define MOUSE_BUTTONS_MAX 32
 
 class Window {
-public:
-	static Window* INSTANCE;
 private:
+	static Window* INSTANCE;
 	GLFWwindow* m_window;
 	int m_width, m_height;
 
@@ -17,9 +16,12 @@ private:
 	bool m_mouseKeysLast[MOUSE_BUTTONS_MAX];
 	double m_xpos, m_ypos, m_lastXpos, m_lastYpos;
 	bool m_isCursorEnabled;
-public:
 	Window(int width, int height, const char* title);
+public:
 	~Window();
+
+	static Window* instantiate(int width, int height, const char* title);
+	static Window* const getInstance() { return INSTANCE; }
 
 	inline GLFWwindow* getWindow() const { return m_window; }
 	inline int getWidth() const { return m_width; }

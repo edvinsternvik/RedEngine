@@ -3,14 +3,16 @@
 
 class Time {
 private:
+	static Time* instance;
+
 	double m_deltaTime;
 	std::chrono::time_point<std::chrono::steady_clock> m_start;
 	std::chrono::time_point<std::chrono::steady_clock> m_stop;
-public:
 	Time();
-	~Time();
+public:
+	static Time* getInstance();
 
-	inline const double getDeltaTime() const { return m_deltaTime; }
+	inline static const double getDeltaTime() { return instance->m_deltaTime; }
 
 	friend class RedEngine;
 private:

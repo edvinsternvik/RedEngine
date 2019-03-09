@@ -7,9 +7,6 @@ void cursor_pos_callback(GLFWwindow * window, double xpos, double ypos);
 Window* Window::INSTANCE = nullptr;
 
 Window::Window(int width, int height, const char * title) : m_width(width), m_height(height) {
-
-	Window::INSTANCE = this;
-
 	if (!glfwInit()) gameEngineDebug("GLFW COULD NOT BE INITIALIZED");
 
 	m_window = glfwCreateWindow(width, height, title, NULL, NULL);
@@ -29,6 +26,13 @@ Window::Window(int width, int height, const char * title) : m_width(width), m_he
 
 Window::~Window() {
 	glfwTerminate();
+}
+
+Window * Window::instantiate(int width, int height, const char* title) {
+	if (INSTANCE == nullptr) {
+		INSTANCE = new Window(width, height, title);
+	}
+	return INSTANCE;
 }
 
 void Window::getMousePos(double & xpos, double & ypos) {

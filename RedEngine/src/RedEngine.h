@@ -16,6 +16,7 @@ private:
 	GameObjectManager* m_gameObjectManager;
 	Renderer* m_renderer;
 	Time* m_time;
+
 public:
 	RedEngine();
 	~RedEngine();

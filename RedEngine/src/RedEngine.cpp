@@ -6,15 +6,14 @@ RedEngine::RedEngine() {
 
 RedEngine::~RedEngine() {
 	delete m_window;
-	delete m_camera;
 	delete m_shader;
-	delete m_gameObjectManager;
 	delete m_renderer;
 	delete m_time;
+	delete m_gameObjectManager;
 }
 
 void RedEngine::init(int width, int height, const char* title, CameraType cameraType) {
-	m_window = new Window(width, height, title);
+	m_window = Window::instantiate(width, height, title);
 
 	if (glewInit() != GLEW_OK) {
 		std::cout << "GLEW INIT FAILED" << std::endl;
@@ -29,11 +28,11 @@ void RedEngine::init(int width, int height, const char* title, CameraType camera
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-	m_camera = new Camera(glm::vec3(0.0f), glm::vec3(0.0f), cameraType, glm::vec2(m_window->getWidth(), m_window->getHeight()));
 	m_shader = new Shader;
 	m_gameObjectManager = new GameObjectManager;
+	m_camera = m_gameObjectManager->createCamera(glm::vec3(0.0f), glm::vec3(0.0f), cameraType, glm::vec2(width, height));
 	m_renderer = new Renderer(m_camera, m_gameObjectManager, m_shader);
-	m_time = new Time;
+	m_time = Time::getInstance();
 
 	start();
 

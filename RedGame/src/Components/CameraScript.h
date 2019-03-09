@@ -6,18 +6,18 @@ private:
 
 public:
 	virtual void update() override {
-		/*float walkingSpeed = getTime()->getDeltaTime() * 2.0f;
-		if (getWindow()->getKeyDown(GLFW_KEY_W)) getCamera()->move(glm::vec3(0.0f, 0.0f, -walkingSpeed));
-		if (getWindow()->getKeyDown(GLFW_KEY_S)) getCamera()->move(glm::vec3(0.0f, 0.0f, walkingSpeed));
-		if (getWindow()->getKeyDown(GLFW_KEY_A)) getCamera()->move(glm::vec3(-walkingSpeed, 0.0f, 0.0f));
-		if (getWindow()->getKeyDown(GLFW_KEY_D)) getCamera()->move(glm::vec3(walkingSpeed, 0.0f, 0.0f));
-		if (getWindow()->getKeyDown(GLFW_KEY_Q)) getCamera()->move(glm::vec3(0.0f, -walkingSpeed, 0.0f));
-		if (getWindow()->getKeyDown(GLFW_KEY_E)) getCamera()->move(glm::vec3(0.0f, walkingSpeed, 0.0f));
+		float walkingSpeed = Time::getDeltaTime() * 2.0f;
+		if (Window::getInstance()->getKeyDown(GLFW_KEY_W)) getParentGameObject()->move(glm::vec3(0.0f, 0.0f, -walkingSpeed));
+		if (Window::getInstance()->getKeyDown(GLFW_KEY_S)) getParentGameObject()->move(glm::vec3(0.0f, 0.0f, walkingSpeed));
+		if (Window::getInstance()->getKeyDown(GLFW_KEY_A)) getParentGameObject()->move(glm::vec3(-walkingSpeed, 0.0f, 0.0f));
+		if (Window::getInstance()->getKeyDown(GLFW_KEY_D)) getParentGameObject()->move(glm::vec3(walkingSpeed, 0.0f, 0.0f));
+		if (Window::getInstance()->getKeyDown(GLFW_KEY_Q)) getParentGameObject()->move(glm::vec3(0.0f, -walkingSpeed, 0.0f));
+		if (Window::getInstance()->getKeyDown(GLFW_KEY_E)) getParentGameObject()->move(glm::vec3(0.0f, walkingSpeed, 0.0f));
 
-		if (!getWindow()->getCursorEnabled()) {
+		if (!Window::getInstance()->getCursorEnabled()) {
 			double xpos, ypos;
-			getWindow()->getMouseDelta(xpos, ypos);
-			getCamera()->rotate(glm::vec3(0.0f, xpos * 0.03f, 0.0f));
-		}*/
+			Window::getInstance()->getMouseDelta(xpos, ypos);
+			getParentGameObject()->rotate(glm::vec3(0.0f, xpos * 0.03f, 0.0f));
+		}
 	}
 };
