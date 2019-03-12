@@ -7,6 +7,7 @@
 #include "Renderer.h"
 #include "Camera.h"
 #include "Time.h"
+#include "Input.h"
 
 class RedEngine {
 private:
@@ -16,6 +17,7 @@ private:
 	GameObjectManager* m_gameObjectManager;
 	Renderer* m_renderer;
 	Time* m_time;
+	Input* m_input;
 
 public:
 	RedEngine();

@@ -13,7 +13,7 @@ RedEngine::~RedEngine() {
 }
 
 void RedEngine::init(int width, int height, const char* title, CameraType cameraType) {
-	m_window = Window::instantiate(width, height, title);
+	m_window = new Window(width, height, title);
 
 	if (glewInit() != GLEW_OK) {
 		std::cout << "GLEW INIT FAILED" << std::endl;
@@ -33,6 +33,7 @@ void RedEngine::init(int width, int height, const char* title, CameraType camera
 	m_camera = m_gameObjectManager->createCamera(glm::vec3(0.0f), glm::vec3(0.0f), cameraType, glm::vec2(width, height));
 	m_renderer = new Renderer(m_camera, m_gameObjectManager, m_shader);
 	m_time = Time::getInstance();
+	m_input = Input::instantiate();
 
 	start();
 
@@ -53,7 +54,7 @@ void RedEngine::loop() {
 			}
 		}
 
-		m_window->updateInput();
+		m_input->updateInput();
 
 		m_renderer->renderFrame();
 
