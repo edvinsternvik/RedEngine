@@ -1,6 +1,6 @@
 #include "GameObject.h"
 
-GameObject::GameObject(glm::vec3 pos, glm::vec3 rot, glm::vec3 size) : m_position(pos), m_rotation(rot), m_size(size), m_modelMat(glm::translate(glm::mat4(1.0f), pos)) {
+GameObject::GameObject(glm::vec3 pos, glm::vec3 rot, glm::vec3 scale) : m_position(pos), m_rotation(rot), m_scale(scale), m_modelMat(glm::translate(glm::mat4(1.0f), pos)) {
 	setModelMat();
 }
 
@@ -23,6 +23,19 @@ void GameObject::rotate(glm::vec3 rotation) {
 	setModelMat();
 }
 
+void GameObject::rotateX(float x) {
+	m_rotation.x += x;
+	setModelMat();
+}
+
+void GameObject::rotateY(float y) {
+	m_rotation.y += y;
+}
+
+void GameObject::rotateZ(float z) {
+	m_rotation.z += z;
+}
+
 void GameObject::setRotation(glm::vec3 rotation) {
 	m_rotation = rotation;
 	setModelMat();
@@ -35,11 +48,11 @@ Component * GameObject::addComponent(Component * component) {
 }
 
 void GameObject::setModelMat() {
-	m_modelMat = glm::translate(glm::mat4(1.0f), m_position);
-	m_modelMat = glm::scale(m_modelMat, m_size);
+	m_modelMat = glm::scale(glm::mat4(1.0f), m_scale);
 	m_modelMat = glm::rotate(m_modelMat, glm::radians(m_rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
 	m_modelMat = glm::rotate(m_modelMat, glm::radians(m_rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
 	m_modelMat = glm::rotate(m_modelMat, glm::radians(m_rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+	m_modelMat = glm::translate(m_modelMat, m_position);
 }
 
 glm::mat4 GameObject::getForwardMatrix() {

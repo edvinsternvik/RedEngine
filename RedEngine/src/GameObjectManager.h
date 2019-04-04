@@ -16,9 +16,8 @@ public:
 	~GameObjectManager();
 
 	GameObject* createGameObject(glm::vec3 pos, glm::vec3 rot);
-	GameObject* createGameObject(glm::vec3 pos, glm::vec3 size, glm::vec3 rot, Model* model);
+	GameObject* createGameObject(glm::vec3 pos, glm::vec3 rot, glm::vec3 scale, Model* model);
 	Light* createLight(glm::vec3 pos);
-	Light* createLight(glm::vec3 pos, Model* model);
 	Camera* createCamera(glm::vec3 pos, glm::vec3 rot, CameraType cameraType, glm::vec2 windowSize);
 	inline const std::vector<GameObject*>* getGameObjectList() const { return &m_gameObjectList; };
 	inline const std::vector<ObjectRenderer*>* getObjectRendererList() const { return &m_renderList; };

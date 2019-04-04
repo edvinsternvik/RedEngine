@@ -40,9 +40,13 @@ void main() {
 	float diff = 0;
 	for (int i = 0; i < min(lightCount, 32); i++) {
 		vec3 lightDir = normalize(lightPos[i] - fragPos);
-		diff += max(dot(norm, lightDir), 0.0);
-	}
-	vec3 diffuse = diff * vec3(0.5, 0.5, 0.5);
+		float lightStrength = dot(norm, lightDir);
+		float lightDistance = distance(lightPos[i], fragPos);
+		float lightFalloff = 1.0f / (1.0f + 0.00001f * lightDistance + 0.1f * lightDistance * lightDistance);
 
-	FragColor = texColor * vec4(diffuse + 0.1, 1.0);
+		diff += max(lightStrength * lightFalloff, 0.0);
+	}
+	vec3 diffuse = diff * vec3(1);
+
+	FragColor = texColor * vec4(diffuse + 0.25, 1.0);
 }

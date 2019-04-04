@@ -20,10 +20,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Components\TestComponent.h">
+    <ClInclude Include="src\Components\CameraScript.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Components\CameraScript.h">
+    <ClInclude Include="src\Components\TestComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

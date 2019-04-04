@@ -14,8 +14,8 @@ GameObject * GameObjectManager::createGameObject(glm::vec3 pos, glm::vec3 rot) {
 	return m_gameObjectList.back();
 }
 
-GameObject * GameObjectManager::createGameObject(glm::vec3 pos, glm::vec3 rot, glm::vec3 size, Model * model) {
-	GameObject* newGameObject = new GameObject(pos, rot, size);
+GameObject * GameObjectManager::createGameObject(glm::vec3 pos, glm::vec3 rot, glm::vec3 scale, Model * model) {
+	GameObject* newGameObject = new GameObject(pos, rot, scale);
 	m_gameObjectList.push_back(newGameObject);
 
 	ObjectRenderer* newObjectRenderer = new ObjectRenderer(model);

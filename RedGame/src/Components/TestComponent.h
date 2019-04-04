@@ -1,12 +1,11 @@
 #pragma once
-#include <Component.h>
+#include "Component.h"
 
 class TestComponent : public Component {
 private:
 
 public:
-	
 	virtual void update() override {
-		//getParentGameObject()->move(glm::vec3(0.0f, 0.0f, getTime));
+		getParentGameObject()->rotate(glm::vec3(Time::getDeltaTime() * 10.0f, Time::getDeltaTime() * 10.0f, 0.0f));
 	}
 };
