@@ -5,7 +5,6 @@
 class TestGame : public RedEngine {
 public:
 	Model* m;
-	Model* m2;
 	GameObject* go;
 	Texture* tex;
 	double timeCounter;
@@ -14,14 +13,12 @@ public:
 	virtual void start() override {
 		getWindow()->enableVSync(true);
 		Input::setCusorEnabled(false);
-		
-		tex = new Texture("assets/img/lowPolyIslandTexture.png");
-		m = new Model("assets/models/lowPolyIsland2.obj", tex);
-		m2 = new Model("assets/models/cube.obj", tex);
+
+		tex = new Texture("assets/img/test.png", FilterMode::Nearest);
+		m = new Model("assets/models/cube.obj", tex);
 		go = getGameObjectManager()->createGameObject(glm::vec3(0.0f, -2.0f, 0.0f), glm::vec3(0.0f), glm::vec3(1.0f), m);
+		getGameObjectManager()->createLight(glm::vec3(0, 3, 0));
 		getCamera()->addComponent(new CameraScript);
-		getGameObjectManager()->createLight(glm::vec3(5.0f, 0.0f, 0.0f));
-		getGameObjectManager()->createLight(glm::vec3(0.0f, 2.0f, 0.0f));
 	}
 	
 	virtual void update() override {
