@@ -11,6 +11,7 @@ private:
 	int m_lightPosUniformLocation;
 	int m_lightCountUniformLocation;
 	int m_textureUniformLocation;
+	int m_cameraPosUniformLocation;
 public:
 	Shader();
 	~Shader();
@@ -26,6 +27,7 @@ public:
 	inline int const getViewUniformLocation() const { return m_viewUniformLocation; }
 	inline int const getLightPosUniformLocation() const { return m_lightPosUniformLocation; }
 	inline int const getLightCountUniformLocation() const { return m_lightCountUniformLocation; }
+	inline int const getCameraPosUniformLocation() const { return m_cameraPosUniformLocation; }
 private:
 	unsigned int compileShader(GLenum shaderType, const char* shaderSource);
 	unsigned int createShaderProgram(unsigned int vertexShaderID, unsigned int fragmentShaderID);

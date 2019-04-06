@@ -14,10 +14,10 @@ public:
 		getWindow()->enableVSync(true);
 		Input::setCusorEnabled(false);
 
-		tex = new Texture("assets/img/test.png", FilterMode::Nearest);
+		tex = new Texture("assets/img/crate.png", TextureType::Diffuse, FilterMode::Nearest);
 		m = new Model("assets/models/cube.obj", tex);
-		go = getGameObjectManager()->createGameObject(glm::vec3(0.0f, -2.0f, 0.0f), glm::vec3(0.0f), glm::vec3(1.0f), m);
-		getGameObjectManager()->createLight(glm::vec3(0, 3, 0));
+		go = getGameObjectManager()->createGameObject(glm::vec3(0.0f, 0.0f, -2.0f), glm::vec3(0.0f), glm::vec3(1.0f), m);
+		getGameObjectManager()->createLight(glm::vec3(0, 0, 4));
 		getCamera()->addComponent(new CameraScript);
 	}
 	

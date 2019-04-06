@@ -19,6 +19,7 @@ Shader::Shader() {
 	m_lightPosUniformLocation = getUniformLocation("lightPos");
 	m_lightCountUniformLocation = getUniformLocation("lightCount");
 	m_textureUniformLocation = getUniformLocation("u_texture");
+	m_cameraPosUniformLocation = getUniformLocation("u_cameraPos");
 	setUniform1i(m_textureUniformLocation, 0);
 }
 

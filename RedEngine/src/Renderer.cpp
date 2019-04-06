@@ -10,6 +10,7 @@ void Renderer::renderFrame() {
 	updateLightPositions();
 	m_shader->setUniformMat4f(m_shader->getProjectionUniformLocation(), &(*m_camera->getProjectionMat())[0][0]);
 	m_shader->setUniformMat4f(m_shader->getViewUniformLocation(), &(*m_camera->getViewMat())[0][0]);
+	m_shader->setUniformVec3f(m_shader->getCameraPosUniformLocation(), &(*m_camera->getPosition())[0]);
 
 	for (ObjectRenderer* objRend : *m_gameObjectManager->getObjectRendererList()) {
 		renderGameObject(objRend);
@@ -18,7 +19,7 @@ void Renderer::renderFrame() {
 
 void Renderer::renderGameObject(ObjectRenderer* objectRenderer) {
 	objectRenderer->getModel()->bind();
-	objectRenderer->getModel()->getTexture()->bind(0);
+	objectRenderer->getModel()->getTexture()->bind();
 	m_shader->setUniformMat4f(m_shader->getModelUniformLocation(), &(*objectRenderer->getParentGameObject()->getModelMat())[0][0]);
 
 	glDebug(glDrawElements(GL_TRIANGLES, objectRenderer->getModel()->getIndexCount(), GL_UNSIGNED_INT, nullptr));
