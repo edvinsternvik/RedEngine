@@ -1,6 +1,24 @@
 #include "Model.h"
 
-Model::Model(const char* modelPath, Texture* texture) : m_modelData(), m_texture(texture) {
+Model::Model(const char* modelPath, Texture* texture) : m_modelData(), m_texture(texture), m_specular(nullptr) {
+	init(modelPath);
+}
+
+Model::Model(const char * modelPath, Texture * texture, Texture * specular) : m_modelData(), m_texture(texture), m_specular(specular) {
+	init(modelPath);
+}
+
+Model::~Model() {
+	delete m_vbo;
+	delete m_ibo;
+	delete m_vao;
+}
+
+void Model::bind() {
+	m_vao->bind();
+}
+
+void Model::init(const char* modelPath) {
 	objReader::parseObjFile(modelPath, &m_modelData);
 	m_indicies = m_modelData.indexData.size();
 
@@ -15,14 +33,4 @@ Model::Model(const char* modelPath, Texture* texture) : m_modelData(), m_texture
 	else {
 		gameEngineDebug("COULD NOT CREATE MODEL: " + (std::string)modelPath);
 	}
-}
-
-Model::~Model() {
-	delete m_vbo;
-	delete m_ibo;
-	delete m_vao;
-}
-
-void Model::bind() {
-	m_vao->bind();
 }

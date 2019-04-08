@@ -6,7 +6,7 @@ class TestGame : public RedEngine {
 public:
 	Model* m;
 	GameObject* go;
-	Texture* tex;
+	Texture* tex, *texSpec;
 	double timeCounter;
 	int frameCounter;
 
@@ -14,10 +14,11 @@ public:
 		getWindow()->enableVSync(true);
 		Input::setCusorEnabled(false);
 
-		tex = new Texture("assets/img/crate.png", TextureType::Diffuse, FilterMode::Nearest);
-		m = new Model("assets/models/cube.obj", tex);
+		tex = new Texture("assets/img/crate.png", FilterMode::Nearest);
+		texSpec = new Texture("assets/img/crate_specular.png", FilterMode::Nearest);
+		m = new Model("assets/models/cube.obj", tex, texSpec);
 		go = getGameObjectManager()->createGameObject(glm::vec3(0.0f, 0.0f, -2.0f), glm::vec3(0.0f), glm::vec3(1.0f), m);
-		getGameObjectManager()->createLight(glm::vec3(0, 0, 4));
+		getGameObjectManager()->createLight(glm::vec3(3, 2, 4));
 		getCamera()->addComponent(new CameraScript);
 	}
 	

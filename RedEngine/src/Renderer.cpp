@@ -19,7 +19,8 @@ void Renderer::renderFrame() {
 
 void Renderer::renderGameObject(ObjectRenderer* objectRenderer) {
 	objectRenderer->getModel()->bind();
-	objectRenderer->getModel()->getTexture()->bind();
+	objectRenderer->getModel()->getTexture()->bind(0);
+	objectRenderer->getModel()->getSpecular()->bind(1);
 	m_shader->setUniformMat4f(m_shader->getModelUniformLocation(), &(*objectRenderer->getParentGameObject()->getModelMat())[0][0]);
 
 	glDebug(glDrawElements(GL_TRIANGLES, objectRenderer->getModel()->getIndexCount(), GL_UNSIGNED_INT, nullptr));

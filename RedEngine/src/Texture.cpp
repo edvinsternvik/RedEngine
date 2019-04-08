@@ -3,15 +3,11 @@
 #include <stb_image/stb_image.h>
 
 
-Texture::Texture(std::string filePath) : m_textureID(0), m_localBuffer(nullptr), m_width(0), m_height(0), m_bpp(0), m_textureType(TextureType::Diffuse), m_filterMode(FilterMode::Linear) {
+Texture::Texture(std::string filePath) : m_textureID(0), m_localBuffer(nullptr), m_width(0), m_height(0), m_bpp(0), m_filterMode(FilterMode::Linear) {
 	init(filePath);
 }
 
-Texture::Texture(std::string filePath, TextureType textureType) : m_textureID(0), m_localBuffer(nullptr), m_width(0), m_height(0), m_bpp(0), m_textureType(textureType), m_filterMode(FilterMode::Linear) {
-	init(filePath);
-}
-
-Texture::Texture(std::string filePath, TextureType textureType, FilterMode filterMode) : m_textureID(0), m_localBuffer(nullptr), m_width(0), m_height(0), m_bpp(0), m_textureType(textureType), m_filterMode(filterMode) {
+Texture::Texture(std::string filePath, FilterMode filterMode) : m_textureID(0), m_localBuffer(nullptr), m_width(0), m_height(0), m_bpp(0), m_filterMode(filterMode) {
 	init(filePath);
 }
 
@@ -19,13 +15,15 @@ Texture::~Texture() {
 	glDebug(glDeleteTextures(1, &m_textureID));
 }
 
-void Texture::bind() {
-	glDebug(glActiveTexture(GL_TEXTURE0 + m_textureType))
-	glDebug(glBindTexture(GL_TEXTURE_2D, m_textureID));
+void Texture::bind(int textureSlot) {
+	if (this != nullptr) {
+		glDebug(glActiveTexture(GL_TEXTURE0 + textureSlot));
+		glDebug(glBindTexture(GL_TEXTURE_2D, m_textureID));
+	}
 }
 
-void Texture::unbind() {
-	glDebug(glActiveTexture(GL_TEXTURE0 + m_textureType))
+void Texture::unbind(int textureSlot) {
+	glDebug(glActiveTexture(GL_TEXTURE0 + textureSlot))
 	glDebug(glBindTexture(GL_TEXTURE_2D, 0));
 }
 

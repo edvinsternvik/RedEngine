@@ -33,25 +33,26 @@ uniform vec3 u_cameraPos;
 uniform vec3 lightPos[32];
 uniform int lightCount;
 uniform sampler2D u_texture;
+uniform sampler2D u_specular;
 
 void main() {
 	vec4 texColor = texture(u_texture, texCoords);
 	vec3 norm = normalize(normal);
 
-	float diffuse = 0, specular = 0;
+	float diff = 0, spec = 0;
 	for (int i = 0; i < min(lightCount, 32); i++) {
 		vec3 lightDir = normalize(lightPos[i] - fragPos);
 		float lightStrength = dot(norm, lightDir);
 		float lightDistance = distance(lightPos[i], fragPos);
-		float lightFalloff = 1.0f / (1.0f + 0.00001f * lightDistance + 0.1f * lightDistance * lightDistance);
+		float lightFalloff = 1.0f / (1.0f + 0.00001f * lightDistance + 0.05f * lightDistance * lightDistance);
 
-		diffuse += max(lightStrength * lightFalloff, 0.0);
+		diff += max(lightStrength * lightFalloff, 0.0);
 		
 		vec3 viewDir = normalize(u_cameraPos - fragPos);
 		vec3 reflectDir = reflect(-lightDir, norm);
-		specular += max(dot(viewDir, reflectDir), 0);
+		spec += max(dot(viewDir, reflectDir), 0);
 	}
+	vec4 specular = texture(u_specular, texCoords) * spec;
 
-
-	FragColor = texColor * vec4(vec3(diffuse + specular) + 0.25, 1.0);
+	FragColor = texColor * vec4(vec3(diff) + 0.25, 1.0) + specular * 0.5f;
 }

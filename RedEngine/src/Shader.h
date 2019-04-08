@@ -10,8 +10,9 @@ private:
 	int m_viewUniformLocation;
 	int m_lightPosUniformLocation;
 	int m_lightCountUniformLocation;
-	int m_textureUniformLocation;
 	int m_cameraPosUniformLocation;
+	int m_textureSamplerUniformLocation;
+	int m_specularSamplerUniformLocation;
 public:
 	Shader();
 	~Shader();
@@ -28,6 +29,8 @@ public:
 	inline int const getLightPosUniformLocation() const { return m_lightPosUniformLocation; }
 	inline int const getLightCountUniformLocation() const { return m_lightCountUniformLocation; }
 	inline int const getCameraPosUniformLocation() const { return m_cameraPosUniformLocation; }
+	inline int const getTextureSamplerUniformLocation() const { return m_textureSamplerUniformLocation; }
+	inline int const getSpecularSamplerUniformLocation() const { return m_specularSamplerUniformLocation; }
 private:
 	unsigned int compileShader(GLenum shaderType, const char* shaderSource);
 	unsigned int createShaderProgram(unsigned int vertexShaderID, unsigned int fragmentShaderID);
