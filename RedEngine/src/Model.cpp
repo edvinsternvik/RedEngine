@@ -20,7 +20,6 @@ void Model::bind() {
 }
 
 void Model::init(const char* modelPath) {
-	std::cout << "model init" << std::endl;
 	objReader::parseObjFile(modelPath, &m_modelData);
 	m_indicies = m_modelData.indexData.size();
 

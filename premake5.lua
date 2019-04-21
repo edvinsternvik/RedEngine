@@ -14,6 +14,8 @@ project "RedEngine"
 	kind "StaticLib"
 	language "C++"
 	staticruntime "off"
+	cppdialect "C++17"
+	defines "GLEW_STATIC"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -38,7 +40,8 @@ project "RedEngine"
 		"opengl32.lib"
 	}
 
-	cppdialect "C++17"
+	filter "system:windows"
+		systemversion "latest"
 
 	filter "configurations:Debug"
 		symbols "On"
@@ -58,6 +61,8 @@ project "RedGame"
 	kind "ConsoleApp"
 	language "C++"
 	staticruntime "off"
+	cppdialect "C++17"
+	systemversion "latest"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -81,9 +86,6 @@ project "RedGame"
 	}
 
 	linkoptions { "-lX11", "-ldl", "-lGL", "-lpthread" }
-
-	cppdialect "C++17"
-	-- systemversion "latest"
 
 	filter "configurations:Debug"
 		symbols "On"
