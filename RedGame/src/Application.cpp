@@ -1,6 +1,6 @@
 #include <RedEngine.h>
-#include "Components\CameraScript.h"
-#include "Components\TestComponent.h"
+#include "Components/CameraScript.h"
+#include "Components/TestComponent.h"
 
 class TestGame : public RedEngine {
 public:
@@ -14,9 +14,9 @@ public:
 		getWindow()->enableVSync(true);
 		Input::setCusorEnabled(false);
 
-		tex = new Texture("assets/img/crate.png", FilterMode::Nearest);
-		texSpec = new Texture("assets/img/crate_specular.png", FilterMode::Nearest);
-		m = new Model("assets/models/cube.obj", tex, texSpec);
+		tex = new Texture("RedGame/assets/img/crate.png", FilterMode::Nearest);
+		texSpec = new Texture("RedGame/assets/img/crate_specular.png", FilterMode::Nearest);
+		m = new Model("RedGame/assets/models/cube.obj", tex, texSpec);
 		go = getGameObjectManager()->createGameObject(glm::vec3(0.0f, 0.0f, -2.0f), glm::vec3(0.0f), glm::vec3(1.0f), m);
 		getGameObjectManager()->createLight(glm::vec3(3, 2, 4));
 		getCamera()->addComponent(new CameraScript);

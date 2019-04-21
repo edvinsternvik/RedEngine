@@ -6,8 +6,8 @@ private:
 	static Time* instance;
 
 	double m_deltaTime;
-	std::chrono::time_point<std::chrono::steady_clock> m_start;
-	std::chrono::time_point<std::chrono::steady_clock> m_stop;
+	std::chrono::high_resolution_clock::time_point m_start;
+	std::chrono::high_resolution_clock::time_point m_stop;
 	Time();
 public:
 	static Time* getInstance();

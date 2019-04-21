@@ -1,4 +1,5 @@
 #include "Model.h"
+#include <iostream>
 
 Model::Model(const char* modelPath, Texture* texture) : m_modelData(), m_texture(texture), m_specular(nullptr) {
 	init(modelPath);
@@ -19,6 +20,7 @@ void Model::bind() {
 }
 
 void Model::init(const char* modelPath) {
+	std::cout << "model init" << std::endl;
 	objReader::parseObjFile(modelPath, &m_modelData);
 	m_indicies = m_modelData.indexData.size();
 

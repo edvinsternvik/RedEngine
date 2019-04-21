@@ -2,6 +2,7 @@
 #include <vector>
 #include "Window.h"
 #include <iostream>
+#include <GLFW/glfw3.h>
 
 Input* Input::INSTANCE = nullptr;
 
