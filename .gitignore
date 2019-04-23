@@ -33,6 +33,9 @@ Makefile
 
 # Visual Studio 2017 auto generated files
 Generated\ Files/
+*.vcxproj
+*.vcxproj.filters
+*.sln
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
