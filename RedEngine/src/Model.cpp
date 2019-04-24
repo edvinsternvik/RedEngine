@@ -1,4 +1,5 @@
 #include "Model.h"
+#include <iostream>
 
 Model::Model(const char* modelPath, Texture* texture) : m_modelData(), m_texture(texture), m_specular(nullptr) {
 	init(modelPath);

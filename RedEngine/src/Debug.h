@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 
-#ifdef GAME_DEBUG 
+#ifdef RED_ENGINE_DEBUG 
 #define glDebug(X) \
 while(glGetError() != GL_NO_ERROR){}\
 X; \

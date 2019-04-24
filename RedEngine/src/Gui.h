@@ -1,12 +1,12 @@
-#pragma once
-#include <GLFW/glfw3.h>
+// #pragma once
+// #include <GLFW/glfw3.h>
 
-class Gui {
-private:
+// class Gui {
+// private:
 
-public:
-	Gui(GLFWwindow* window);
-	~Gui();
+// public:
+// 	Gui(GLFWwindow* window);
+// 	~Gui();
 
-	void renderGui();
-};
+// 	void renderGui();
+// };
