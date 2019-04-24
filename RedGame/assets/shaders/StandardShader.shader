@@ -36,7 +36,7 @@ uniform sampler2D u_texture;
 uniform sampler2D u_specular;
 
 void main() {
-	vec4 texColor = texture(u_texture, texCoords);
+	vec3 texColor = vec3(texture(u_texture, texCoords));
 	vec3 norm = normalize(normal);
 
 	float diff = 0, spec = 0;
@@ -44,7 +44,7 @@ void main() {
 		vec3 lightDir = normalize(lightPos[i] - fragPos);
 		float lightStrength = dot(norm, lightDir);
 		float lightDistance = distance(lightPos[i], fragPos);
-		float lightFalloff = 1.0f / (1.0f + 0.00001f * lightDistance + 0.05f * lightDistance * lightDistance);
+		float lightFalloff = 1.0f / (1.0f + 0.000005f * lightDistance + 0.025f * lightDistance * lightDistance);
 
 		diff += max(lightStrength * lightFalloff, 0.0);
 		
@@ -52,7 +52,9 @@ void main() {
 		vec3 reflectDir = reflect(-lightDir, norm);
 		spec += max(dot(viewDir, reflectDir), 0);
 	}
-	vec4 specular = texture(u_specular, texCoords) * spec;
+	vec3 ambient = 0.25f * texColor;
+	vec3 diffuse = 1.0f * diff * texColor;
+	vec3 specular = 0.5f * spec * vec3(texture(u_specular, texCoords));
 
-	FragColor = texColor * vec4(vec3(diff) + 0.25, 1.0) + specular * 0.5f;
+	FragColor = vec4(ambient + diffuse + specular, 1.0f);
 }
