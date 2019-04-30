@@ -44,15 +44,17 @@ void GameObject::setRotation(glm::vec3 rotation) {
 Component * GameObject::addComponent(Component * component) {
 	m_components.push_back(component);
 	component->setParentGameObject(this);
+	component->init();
+	component->start();
 	return component;
 }
 
 void GameObject::setModelMat() {
 	m_modelMat = glm::scale(glm::mat4(1.0f), m_scale);
+	m_modelMat = glm::translate(m_modelMat, m_position);
 	m_modelMat = glm::rotate(m_modelMat, glm::radians(m_rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
 	m_modelMat = glm::rotate(m_modelMat, glm::radians(m_rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
 	m_modelMat = glm::rotate(m_modelMat, glm::radians(m_rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
-	m_modelMat = glm::translate(m_modelMat, m_position);
 }
 
 glm::mat4 GameObject::getForwardMatrix() {
