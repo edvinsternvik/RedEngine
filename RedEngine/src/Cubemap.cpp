@@ -1,7 +1,7 @@
 #include "Cubemap.h"
 #include "Debug.h"
-#include <GL\glew.h>
-#include <stb_image\stb_image.h>
+#include <GL/glew.h>
+#include <stb_image/stb_image.h>
 
 
 Cubemap::Cubemap(std::vector<std::string> imagePaths) : 
