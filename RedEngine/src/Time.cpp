@@ -6,7 +6,7 @@ Time* Time::instance = 0;
 Time::Time() : m_start(std::chrono::high_resolution_clock::now()) {
 }
 
-Time * Time::getInstance() {
+Time * Time::Instantiate() {
 	if (instance == 0) {
 		instance = new Time();
 	}

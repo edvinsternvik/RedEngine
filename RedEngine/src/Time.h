@@ -10,7 +10,7 @@ private:
 	std::chrono::high_resolution_clock::time_point m_stop;
 	Time();
 public:
-	static Time* getInstance();
+	static Time* Instantiate();
 
 	inline static const double getDeltaTime() { return instance->m_deltaTime; }
 

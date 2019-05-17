@@ -32,8 +32,9 @@ void RedEngine::init(int width, int height, const char* title, CameraType camera
 	m_gameObjectManager = new GameObjectManager;
 	m_camera = m_gameObjectManager->createCamera(glm::vec3(0.0f), glm::vec3(0.0f), cameraType, glm::vec2(width, height));
 	m_renderer = new Renderer(m_camera, m_gameObjectManager, m_shader);
-	m_time = Time::getInstance();
+	m_time = Time::Instantiate();
 	m_input = Input::instantiate();
+	m_physicsManager = PhysicsManager::Instantiate();
 
 	start();
 
