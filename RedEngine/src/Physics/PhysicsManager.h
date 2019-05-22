@@ -3,7 +3,7 @@
 class PhysicsManager {
 public:
 	static PhysicsManager* INSTANCE;
-	float gravity = 9.82f;
+	static float gravity;
 public:
 	PhysicsManager();
 	~PhysicsManager();

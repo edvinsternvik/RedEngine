@@ -2,6 +2,8 @@
 #include <Component.h>
 
 class Rigidbody : public Component {
+public:
+	glm::vec3 velocity;
 private:
 	GameObject* m_object;
 public:
