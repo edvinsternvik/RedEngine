@@ -34,7 +34,6 @@ void RedEngine::init(int width, int height, const char* title, CameraType camera
 	m_renderer = new Renderer(m_camera, m_gameObjectManager, m_shader);
 	m_time = Time::Instantiate();
 	m_input = Input::instantiate();
-	m_physicsManager = PhysicsManager::Instantiate();
 
 	start();
 

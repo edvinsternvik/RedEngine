@@ -8,9 +8,6 @@
 #include "Camera.h"
 #include "Time.h"
 #include "Input.h"
-#include "Physics/PhysicsManager.h"
-
-#include <Components/Rigidbody.h>
 
 class RedEngine {
 private:
@@ -19,7 +16,6 @@ private:
 	Shader* m_shader;
 	GameObjectManager* m_gameObjectManager;
 	Renderer* m_renderer;
-	PhysicsManager* m_physicsManager;
 	Time* m_time;
 	Input* m_input;
 
@@ -37,7 +33,6 @@ public:
 	inline Time* const getTime() const { return m_time;  }
 	inline GameObjectManager* const getGameObjectManager() const { return m_gameObjectManager; }
 	inline Renderer* const getRenderer() const { return m_renderer; }
-	inline PhysicsManager* const getPhysicsManager() const { return m_physicsManager; }
 private:
 	void loop();
 };
