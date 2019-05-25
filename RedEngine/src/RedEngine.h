@@ -11,6 +11,7 @@
 #include "Physics/PhysicsManager.h"
 
 #include <Components/Rigidbody.h>
+#include <Components/CubeCollider.h>
 
 class RedEngine {
 private:

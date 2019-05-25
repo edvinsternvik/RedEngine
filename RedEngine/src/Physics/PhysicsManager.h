@@ -2,11 +2,10 @@
 
 class PhysicsManager {
 public:
-	static PhysicsManager* INSTANCE;
-	static float gravity;
+	float gravity = 9.82f;
 public:
 	PhysicsManager();
 	~PhysicsManager();
 
-	static PhysicsManager* Instantiate();
+	void calculateCollisions();
 }; 

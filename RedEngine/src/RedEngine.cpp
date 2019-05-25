@@ -10,6 +10,7 @@ RedEngine::~RedEngine() {
 	delete m_renderer;
 	delete m_time;
 	delete m_gameObjectManager;
+	delete m_physicsManager;
 }
 
 void RedEngine::init(int width, int height, const char* title, CameraType cameraType) {
@@ -34,7 +35,7 @@ void RedEngine::init(int width, int height, const char* title, CameraType camera
 	m_renderer = new Renderer(m_camera, m_gameObjectManager, m_shader);
 	m_time = Time::Instantiate();
 	m_input = Input::instantiate();
-	m_physicsManager = PhysicsManager::Instantiate();
+	m_physicsManager = new PhysicsManager();
 
 	start();
 
@@ -47,6 +48,7 @@ void RedEngine::loop() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		m_time->updateDeltaTime();
+		m_physicsManager->calculateCollisions();
 		
 		update();
 		for (GameObject* go : *m_gameObjectManager->getGameObjectList()) {
