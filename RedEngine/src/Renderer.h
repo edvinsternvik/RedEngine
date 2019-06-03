@@ -1,19 +1,18 @@
 #pragma once
-#include "GameObjectManager.h"
 #include "Shader.h"
 #include "Camera.h"
+#include "Light.h"
+#include "Components/ObjectRenderer.h"
 
 class Renderer {
 private:
-	Camera* m_camera;
-	GameObjectManager* m_gameObjectManager;
 	Shader* m_shader;
 public:
-	Renderer(Camera* camera, GameObjectManager* gameObjectManager, Shader* shader);
+	Renderer(Shader* shader);
 	~Renderer();
 
-	void renderFrame();
-private:
+	void updateCamera(Camera* camera);
+	void updateLightPositions(std::vector<Light*>* lights);
 	void renderGameObject(ObjectRenderer* objectRenderer);
-	void updateLightPositions();
+private:
 };

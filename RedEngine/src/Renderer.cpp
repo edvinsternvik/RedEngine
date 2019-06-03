@@ -1,20 +1,15 @@
 #include "Renderer.h"
 
-Renderer::Renderer(Camera * camera, GameObjectManager * gameObjectManager, Shader * shader) : m_camera(camera), m_gameObjectManager(gameObjectManager), m_shader(shader) {
+Renderer::Renderer(Shader* shader) : m_shader(shader) {
 }
 
 Renderer::~Renderer() {
 }
 
-void Renderer::renderFrame() {
-	updateLightPositions();
-	m_shader->setUniformMat4f(m_shader->getProjectionUniformLocation(), &(*m_camera->getProjectionMat())[0][0]);
-	m_shader->setUniformMat4f(m_shader->getViewUniformLocation(), &(*m_camera->getViewMat())[0][0]);
-	m_shader->setUniformVec3f(m_shader->getCameraPosUniformLocation(), &(*m_camera->getPosition())[0]);
-
-	for (ObjectRenderer* objRend : *m_gameObjectManager->getObjectRendererList()) {
-		renderGameObject(objRend);
-	}
+void Renderer::updateCamera(Camera* camera) {
+	m_shader->setUniformMat4f(m_shader->getProjectionUniformLocation(), &(*camera->getProjectionMat())[0][0]);
+	m_shader->setUniformMat4f(m_shader->getViewUniformLocation(), &(*camera->getViewMat())[0][0]);
+	m_shader->setUniformVec3f(m_shader->getCameraPosUniformLocation(), &(*camera->getPosition())[0]);
 }
 
 void Renderer::renderGameObject(ObjectRenderer* objectRenderer) {
@@ -26,15 +21,15 @@ void Renderer::renderGameObject(ObjectRenderer* objectRenderer) {
 	glDebug(glDrawElements(GL_TRIANGLES, objectRenderer->getModel()->getIndexCount(), GL_UNSIGNED_INT, nullptr));
 }
 
-void Renderer::updateLightPositions() {
-	std::vector<glm::vec3> tempList;
-	auto lList = m_gameObjectManager->getLightList();
-	for (int i = 0; i < lList->size(); i++) {
-		glm::vec3* test = (*lList)[0]->getPosition();
-		tempList.push_back(*test);
-	}
-	if (tempList.size() == 0) tempList.push_back(glm::vec3(0.0f));
+void Renderer::updateLightPositions(std::vector<Light*>* lights) {
+	std::vector<glm::vec3> lightPositionList;
 
-	m_shader->setUniform1i(m_shader->getLightCountUniformLocation(), lList->size());
-	m_shader->setUniformVec3f(m_shader->getLightPosUniformLocation(), &((tempList[0])[0]));
+	for(Light* light : *lights) {
+		lightPositionList.push_back(*(light->getPosition()));
+	}
+
+	if (lightPositionList.size() == 0) lightPositionList.push_back(glm::vec3(0.0f));
+
+	m_shader->setUniform1i(m_shader->getLightCountUniformLocation(), lightPositionList.size());
+	m_shader->setUniformVec3f(m_shader->getLightPosUniformLocation(), &((lightPositionList[0])[0]));
 }

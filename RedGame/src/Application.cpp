@@ -4,6 +4,8 @@
 
 class TestGame : public RedEngine {
 public:
+	Scene* currentScene;
+
 	double timeCounter;
 	int frameCounter;
 
@@ -11,12 +13,15 @@ public:
 		getWindow()->enableVSync(true);
 		Input::setCusorEnabled(false);
 
+		currentScene = getSceneManager()->getCurrentScene();
+
 		Texture* tex = new Texture("assets/img/crate.png", FilterMode::Nearest);
 		Texture* texSpec = new Texture("assets/img/crate_specular.png", FilterMode::Nearest);
 		Model* m = new Model("assets/models/cube.obj", tex, texSpec);
-		GameObject* go = getGameObjectManager()->createGameObject(glm::vec3(0.0f, -2.0f, -4.0f), glm::vec3(0.0f), glm::vec3(1.0f), m);
-		getGameObjectManager()->createLight(glm::vec3(0, 2, 0));
-		getCamera()->addComponent(new CameraScript);
+
+		GameObject* go = currentScene->createGameObject(glm::vec3(0.0f, -2.0f, -4.0f), glm::vec3(0.0f), glm::vec3(1.0f), m);
+		currentScene->createLight(glm::vec3(0, 2, 0));
+		currentScene->getCamera()->addComponent(new CameraScript);
 	}
 	
 	virtual void update() override {

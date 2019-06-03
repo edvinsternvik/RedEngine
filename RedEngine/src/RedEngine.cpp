@@ -8,13 +8,14 @@ RedEngine::~RedEngine() {
 	delete m_window;
 	delete m_shader;
 	delete m_renderer;
+	delete m_sceneManager;
 	delete m_time;
-	delete m_gameObjectManager;
 }
 
 void RedEngine::init(int width, int height, const char* title, CameraType cameraType) {
 	m_window = new Window(width, height, title);
 
+	//This should be in the renderer constructor but it neads to be done before initializing m_shader or any other OpenGL specific code
 	if (glewInit() != GLEW_OK) {
 		std::cout << "GLEW INIT FAILED" << std::endl;
 	}
@@ -27,11 +28,12 @@ void RedEngine::init(int width, int height, const char* title, CameraType camera
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	//---------------------------------------------------------------------------------------------------------------------------------
 
 	m_shader = new Shader;
-	m_gameObjectManager = new GameObjectManager;
-	m_camera = m_gameObjectManager->createCamera(glm::vec3(0.0f), glm::vec3(0.0f), cameraType, glm::vec2(width, height));
-	m_renderer = new Renderer(m_camera, m_gameObjectManager, m_shader);
+	m_renderer = new Renderer(m_shader);
+	m_sceneManager = new SceneManager();
+	m_sceneManager->getCurrentScene()->createCamera(glm::vec3(0.0f), glm::vec3(0.0f), CameraType::Perspective, glm::vec2(width, height));
 	m_time = Time::Instantiate();
 	m_input = Input::instantiate();
 
@@ -48,15 +50,12 @@ void RedEngine::loop() {
 		m_time->updateDeltaTime();
 		
 		update();
-		for (GameObject* go : *m_gameObjectManager->getGameObjectList()) {
-			for (Component* component : *go->getComponentList()) {
-				component->update();
-			}
-		}
+
+		m_sceneManager->getCurrentScene()->updateObjects();
 
 		m_input->updateInput();
 
-		m_renderer->renderFrame();
+		m_sceneManager->getCurrentScene()->renderScene(m_renderer);
 
 		render();
 
