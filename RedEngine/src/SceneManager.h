@@ -5,11 +5,14 @@
 class SceneManager {
 private:
     std::vector<Scene*> scenes;
-    Scene* currentScene;
+    int currentSceneIndex;
 public:
     SceneManager();
     ~SceneManager();
 
     Scene* const getCurrentScene() const;
+    int addScene();
     void changeScene(int sceneIndex);
+    void nextScene();
+    void previousScene();
 };

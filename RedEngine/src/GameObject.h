@@ -8,8 +8,9 @@
 class Component;
 
 class GameObject {
+public:
+	glm::vec3 position, rotation, scale;
 protected:
-	glm::vec3 m_position, m_rotation, m_scale;
 	std::vector<Component*> m_components;
 	glm::mat4 m_modelMat;
 public:
@@ -25,9 +26,6 @@ public:
 	void setRotation(glm::vec3 rotation);
 	Component* addComponent(Component* component);
 	inline std::vector<Component*>* getComponentList() { return &m_components; }
-	inline glm::vec3* const getPosition() { return &m_position; };
-	inline glm::vec3* const getScale() { return &m_scale; };
-	inline glm::vec3* const getRotation() { return &m_rotation; }; 
 	inline glm::mat4* const getModelMat() { return &m_modelMat; }; 
 protected:
 	virtual void setModelMat();

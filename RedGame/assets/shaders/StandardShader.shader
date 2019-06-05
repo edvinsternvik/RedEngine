@@ -5,18 +5,18 @@ layout(location = 0) in vec3 aPos;
 layout(location = 1) in vec3 aNormals;
 layout(location = 2) in vec2 aTexCoords;
 
-uniform mat4 projMat;
-uniform mat4 viewMat;
-uniform mat4 modelMat;
+uniform mat4 u_projMat;
+uniform mat4 u_viewMat;
+uniform mat4 u_modelMat;
 
 out vec3 fragPos;
 out vec3 normal;
 out vec2 texCoords;
 
 void main() {
-	gl_Position = projMat * viewMat * modelMat * vec4(aPos, 1.0);
-	fragPos = vec3(modelMat * vec4(aPos, 1.0));
-	normal = mat3(transpose(inverse(modelMat))) * aNormals;
+	gl_Position = u_projMat * u_viewMat * u_modelMat * vec4(aPos, 1.0);
+	fragPos = vec3(u_modelMat * vec4(aPos, 1.0));
+	normal = mat3(transpose(inverse(u_modelMat))) * aNormals;
 	texCoords = aTexCoords;
 }
 
@@ -30,8 +30,9 @@ in vec3 normal;
 in vec2 texCoords;
 
 uniform vec3 u_cameraPos;
-uniform vec3 lightPos[32];
-uniform int lightCount;
+uniform vec3 u_lightPos[32];
+uniform float u_lightBrightness[32];
+uniform int u_lightCount;
 uniform sampler2D u_texture;
 uniform sampler2D u_specular;
 
@@ -40,10 +41,10 @@ void main() {
 	vec3 norm = normalize(normal);
 
 	float diff = 0, spec = 0;
-	for (int i = 0; i < min(lightCount, 32); i++) {
-		vec3 lightDir = normalize(lightPos[i] - fragPos);
-		float lightStrength = dot(norm, lightDir);
-		float lightDistance = distance(lightPos[i], fragPos);
+	for (int i = 0; i < min(u_lightCount, 32); i++) {
+		vec3 lightDir = normalize(u_lightPos[i] - fragPos);
+		float lightStrength = dot(norm, lightDir) * u_lightBrightness[i];
+		float lightDistance = distance(u_lightPos[i], fragPos);
 		float lightFalloff = 1.0f / (1.0f + 0.000005f * lightDistance + 0.025f * lightDistance * lightDistance);
 
 		diff += max(lightStrength * lightFalloff, 0.0);

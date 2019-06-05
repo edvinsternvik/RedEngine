@@ -1,4 +1,5 @@
 #include "Shader.h"
+#include <GL/glew.h>
 #include <fstream>
 #include <sstream>
 
@@ -6,18 +7,19 @@ Shader::Shader() {
 	std::string vertShaderSource, fragShaderSource;
 	parseShader("assets/shaders/StandardShader.shader", &vertShaderSource, &fragShaderSource);
 
-	unsigned int vertexShader = compileShader(GL_VERTEX_SHADER, vertShaderSource.c_str());
-	unsigned int fragmentShader = compileShader(GL_FRAGMENT_SHADER, fragShaderSource.c_str());
+	unsigned int vertexShader = compileShader(ShaderType::VertexShader, vertShaderSource.c_str());
+	unsigned int fragmentShader = compileShader(ShaderType::FragmentShader, fragShaderSource.c_str());
 
 	m_programID = createShaderProgram(vertexShader, fragmentShader);
 
 	useShader();
 
-	m_projectionUniformLocation = getUniformLocation("projMat");
-	m_modelUniformLocation = getUniformLocation("modelMat");
-	m_viewUniformLocation = getUniformLocation("viewMat");
-	m_lightPosUniformLocation = getUniformLocation("lightPos");
-	m_lightCountUniformLocation = getUniformLocation("lightCount");
+	m_projectionUniformLocation = getUniformLocation("u_projMat");
+	m_modelUniformLocation = getUniformLocation("u_modelMat");
+	m_viewUniformLocation = getUniformLocation("u_viewMat");
+	m_lightPosUniformLocation = getUniformLocation("u_lightPos");
+	m_lightBrightnessUniformLocation = getUniformLocation("u_lightBrightness");
+	m_lightCountUniformLocation = getUniformLocation("u_lightCount");
 	m_cameraPosUniformLocation = getUniformLocation("u_cameraPos");
 	m_textureSamplerUniformLocation = getUniformLocation("u_texture");
 	m_specularSamplerUniformLocation = getUniformLocation("u_specular");
@@ -36,6 +38,10 @@ void Shader::setUniform1i(int uniformLocation, int value) {
 	glDebug(if (uniformLocation > -1) glUniform1i(uniformLocation, value));
 }
 
+void Shader::setUniform1f(int uniformLocation, float value) {
+	glDebug(if(uniformLocation > -1) glUniform1f(uniformLocation, value));
+}
+
 void Shader::setUniformMat4f(int uniformLocation, float * mat4) {
 	glDebug(if(uniformLocation > -1) glUniformMatrix4fv(uniformLocation, 1, GL_FALSE, mat4));
 }
@@ -52,8 +58,10 @@ int Shader::getUniformLocation(const char * uniformName) {
 	glDebug(return  glGetUniformLocation(m_programID, uniformName));
 }
 
-unsigned int Shader::compileShader(GLenum shaderType, const char * shaderSource) {
-	glDebug(unsigned int shaderID = glCreateShader(shaderType));
+unsigned int Shader::compileShader(ShaderType shaderType, const char * shaderSource) {
+	GLenum glShaderType = ShaderTypeToGLShaderType(shaderType);
+
+	glDebug(unsigned int shaderID = glCreateShader(glShaderType));
 	glDebug(glShaderSource(shaderID, 1, &shaderSource, NULL));
 	glDebug(glCompileShader(shaderID));
 
@@ -127,4 +135,25 @@ void Shader::checkForProgramError(unsigned int programID) {
 
 		gameEngineDebug(message);
 	}
+}
+
+unsigned int Shader::ShaderTypeToGLShaderType(ShaderType shaderType) {
+	switch(shaderType) {
+		case ShaderType::VertexShader:
+			return GL_VERTEX_SHADER;
+		case ShaderType::FragmentShader:
+			return GL_FRAGMENT_SHADER;
+		case ShaderType::ComputeShader:
+			return GL_COMPUTE_SHADER;
+		case ShaderType::TessControlShader:
+			return GL_TESS_CONTROL_SHADER;
+		case ShaderType::TessEvaluationShader:
+			return GL_TESS_EVALUATION_SHADER;
+		case ShaderType::GeometryShader:
+			return GL_GEOMETRY_SHADER;
+		default:
+			gameEngineDebug("Error in Shader.cpp: ShaderTypeToGLShaderType(ShaderType shaderType): Shadertype does not exist");
+			break;
+	}
+	return 0;
 }

@@ -20,8 +20,14 @@ public:
 		Model* m = new Model("assets/models/cube.obj", tex, texSpec);
 
 		GameObject* go = currentScene->createGameObject(glm::vec3(0.0f, -2.0f, -4.0f), glm::vec3(0.0f), glm::vec3(1.0f), m);
-		currentScene->createLight(glm::vec3(0, 2, 0));
+		currentScene->createLight(glm::vec3(0, 2, 0), 1.0f);
+		currentScene->createCamera(glm::vec3(0.0f), glm::vec3(0.0f), CameraType::Perspective, glm::vec2(1280, 720));
 		currentScene->getCamera()->addComponent(new CameraScript);
+
+		int sceneIndex = getSceneManager()->addScene();
+		getSceneManager()->changeScene(sceneIndex);
+		getSceneManager()->getCurrentScene()->createCamera(glm::vec3(0.0f), glm::vec3(0.0f), CameraType::Perspective, glm::vec2(1280, 720));
+		getSceneManager()->changeScene(0);
 	}
 	
 	virtual void update() override {
@@ -30,10 +36,12 @@ public:
 		timeCounter += getTime()->getDeltaTime();
 		frameCounter++;
 		if (timeCounter > 1.0) {
-			std::cout << frameCounter << std::endl;
+			gameEngineDebug(frameCounter);
 			timeCounter--;
 			frameCounter = 0;
 		}
+
+		if(Input::getKey(GLFW_KEY_L)) getSceneManager()->nextScene();
 	}
 
 	virtual void render() {
@@ -44,7 +52,7 @@ public:
 int main() {
 	TestGame game;
 
-	game.init(1280, 720, "Hello there", CameraType::Perspective);
+	game.init(1280, 720, "Hello there");
 
 	game.start();
 }

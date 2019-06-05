@@ -4,7 +4,7 @@ SceneManager::SceneManager() {
     if(scenes.size() < 1) {
         scenes.push_back(new Scene);
     }
-    currentScene = scenes[0];
+    currentSceneIndex = 0;
 }
 
 SceneManager::~SceneManager() {
@@ -14,7 +14,13 @@ SceneManager::~SceneManager() {
 }
 
 Scene* const SceneManager::getCurrentScene() const {
-    return currentScene;
+    return scenes[currentSceneIndex];
+}
+
+int SceneManager::addScene() {
+    scenes.push_back(new Scene);
+
+    return scenes.size() - 1;
 }
 
 void SceneManager::changeScene(int sceneIndex) {
@@ -25,5 +31,17 @@ void SceneManager::changeScene(int sceneIndex) {
         sceneIndex = scenes.size() - 1;
     }
 
-    currentScene = scenes[sceneIndex];
+    currentSceneIndex = sceneIndex;
+}
+
+void SceneManager::nextScene() {
+    currentSceneIndex += 1;
+
+    if(currentSceneIndex >= scenes.size()) currentSceneIndex = 0;
+}
+
+void SceneManager::previousScene() {
+    currentSceneIndex -= 1;
+
+    if(currentSceneIndex < 0) currentSceneIndex = scenes.size() - 1;
 }
