@@ -89,6 +89,7 @@ project "RedGame"
 
 	filter "configurations:Debug"
 		symbols "On"
+		defines "RED_ENGINE_DEBUG"
 		runtime "Debug"
 
 	filter "configurations:Release"
