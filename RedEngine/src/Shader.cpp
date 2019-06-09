@@ -3,9 +3,9 @@
 #include <fstream>
 #include <sstream>
 
-Shader::Shader() {
+Shader::Shader(std::string shaderPath) {
 	std::string vertShaderSource, fragShaderSource;
-	parseShader("assets/shaders/StandardShader.shader", &vertShaderSource, &fragShaderSource);
+	parseShader(shaderPath.c_str(), &vertShaderSource, &fragShaderSource);
 
 	unsigned int vertexShader = compileShader(ShaderType::VertexShader, vertShaderSource.c_str());
 	unsigned int fragmentShader = compileShader(ShaderType::FragmentShader, fragShaderSource.c_str());

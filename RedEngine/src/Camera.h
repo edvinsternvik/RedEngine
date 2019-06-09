@@ -9,15 +9,13 @@ enum CameraType {
 
 class Camera : public GameObject {
 private:
-	glm::mat4 m_projectionMat;
+	glm::mat4 m_projectionMat, m_viewMat;
 	CameraType m_cameraType;
 public:
 	Camera(glm::vec3 pos, glm::vec3 rot, CameraType cameraType, glm::vec2 windowSize);
 	~Camera();
 
-
-	inline glm::mat4* const getProjectionMat() { return &m_projectionMat; };
-	inline glm::mat4* const getViewMat() { return &m_modelMat; };
-protected:
-	void setModelMat() override;
+	void setViewMat(glm::vec3& pos, glm::vec3& rot);
+	inline glm::mat4* const getProjectionMat() { return &m_projectionMat; }
+	inline glm::mat4* const getViewMat() { return &m_viewMat; }
 };

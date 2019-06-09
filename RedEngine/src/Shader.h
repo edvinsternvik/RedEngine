@@ -1,5 +1,6 @@
 #pragma once
 #include "Debug.h"
+#include <string>
 
 enum class ShaderType {
 	VertexShader = 0, FragmentShader, ComputeShader, TessControlShader, TessEvaluationShader, GeometryShader
@@ -18,7 +19,7 @@ private:
 	int m_textureSamplerUniformLocation;
 	int m_specularSamplerUniformLocation;
 public:
-	Shader();
+	Shader(std::string shaderPath);
 	~Shader();
 
 	void useShader();

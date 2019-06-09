@@ -5,9 +5,12 @@
 class ObjectRenderer : public Component {
 private:
 	Model* m_model;
+	glm::mat4 m_modelMat;
 public:
 	ObjectRenderer(Model* model) : m_model(model) {}
 	~ObjectRenderer() {}
 
+	void setModelMat(glm::vec3& pos, glm::vec3& rot, glm::vec3& scale);
 	inline Model* const getModel() const { return m_model; }
+	inline glm::mat4* const getModelMat() { return &m_modelMat; };
 };

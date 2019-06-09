@@ -30,7 +30,7 @@ void RedEngine::init(int width, int height, const char* title) {
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	//---------------------------------------------------------------------------------------------------------------------------------
 
-	m_shader = new Shader;
+	m_shader = new Shader("assets/shaders/StandardShader.shader");
 	m_renderer = new Renderer(m_shader);
 	m_sceneManager = new SceneManager();
 	m_time = Time::Instantiate();
