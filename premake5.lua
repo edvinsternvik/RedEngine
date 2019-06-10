@@ -85,7 +85,8 @@ project "RedGame"
 		"GLEW"
 	}
 
-	linkoptions { "-lX11", "-ldl", "-lGL", "-lpthread" }
+	filter "system:linux"
+		linkoptions { "-lX11", "-ldl", "-lGL", "-lpthread" }
 
 	filter "configurations:Debug"
 		symbols "On"

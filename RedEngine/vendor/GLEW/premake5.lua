@@ -19,3 +19,7 @@ project "GLEW"
 	defines {
 		"GLEW_STATIC"
 	}
+
+	filter "system:Windows"
+		systemversion "latest"
+		
