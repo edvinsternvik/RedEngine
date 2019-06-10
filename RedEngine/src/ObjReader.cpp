@@ -1,7 +1,6 @@
 #include "ObjReader.h"
 
 namespace objReader {
-
 	void parseObjFile(std::string filePath, modelData* mData) {
 		int vertIndex[3] = { 0, 0, 0 }; //0:positions, 1:normals, 2:uvs
 

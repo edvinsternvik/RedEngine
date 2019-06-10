@@ -21,7 +21,7 @@ public:
 	RedEngine();
 	~RedEngine();
 
-	void init(int width, int height, const char* title, CameraType cameraType);
+	void init(int width, int height, const char* title);
 	virtual void start() = 0;
 	virtual void update() = 0;
 	virtual void render() = 0;

@@ -3,7 +3,9 @@
 
 class Light : public GameObject {
 public:
-	Light(glm::vec3 pos);
+	float brightness;
+public:
+	Light(glm::vec3 pos, float brightness);
 	~Light();
 };
 

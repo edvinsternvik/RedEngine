@@ -12,7 +12,7 @@ RedEngine::~RedEngine() {
 	delete m_time;
 }
 
-void RedEngine::init(int width, int height, const char* title, CameraType cameraType) {
+void RedEngine::init(int width, int height, const char* title) {
 	m_window = new Window(width, height, title);
 
 	//This should be in the renderer constructor but it neads to be done before initializing m_shader or any other OpenGL specific code
@@ -30,10 +30,9 @@ void RedEngine::init(int width, int height, const char* title, CameraType camera
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	//---------------------------------------------------------------------------------------------------------------------------------
 
-	m_shader = new Shader;
+	m_shader = new Shader("assets/shaders/StandardShader.shader");
 	m_renderer = new Renderer(m_shader);
 	m_sceneManager = new SceneManager();
-	m_sceneManager->getCurrentScene()->createCamera(glm::vec3(0.0f), glm::vec3(0.0f), CameraType::Perspective, glm::vec2(width, height));
 	m_time = Time::Instantiate();
 	m_input = Input::instantiate();
 

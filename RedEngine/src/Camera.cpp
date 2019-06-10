@@ -14,9 +14,9 @@ Camera::Camera(glm::vec3 pos, glm::vec3 rot, CameraType cameraType, glm::vec2 wi
 Camera::~Camera() {
 }
 
-void Camera::setModelMat() {
-	m_modelMat = glm::rotate(glm::mat4(1.0f), glm::radians(m_rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
-	m_modelMat = glm::rotate(m_modelMat, glm::radians(m_rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
-	m_modelMat = glm::rotate(m_modelMat, glm::radians(m_rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
-	m_modelMat = glm::translate(m_modelMat, -m_position);
+void Camera::setViewMat(glm::vec3& pos, glm::vec3& rot) {
+	m_viewMat = glm::rotate(glm::mat4(1.0f), glm::radians(rot.y), glm::vec3(0.0f, 1.0f, 0.0f));
+	m_viewMat = glm::rotate(m_viewMat, glm::radians(rot.x), glm::vec3(1.0f, 0.0f, 0.0f));
+	m_viewMat = glm::rotate(m_viewMat, glm::radians(rot.z), glm::vec3(0.0f, 0.0f, 1.0f));
+	m_viewMat = glm::translate(m_viewMat, -pos);
 }

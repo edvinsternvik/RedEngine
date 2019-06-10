@@ -18,7 +18,7 @@ void Scene::updateObjects() {
 }
 
 void Scene::renderScene(Renderer* renderer) {
-    renderer->updateCamera(m_camera);
+    renderer->updateCamera(getCamera());
     renderer->updateLightPositions(&m_lights);
 
     for(ObjectRenderer* objRenderer : m_objectRenderers) {
@@ -50,8 +50,8 @@ GameObject* Scene::createGameObject(glm::vec3 position, glm::vec3 rotation, glm:
     return m_gameObjects.back();
 }
 
-Light* Scene::createLight(glm::vec3 pos) {
-	m_lights.push_back(new Light(pos));
+Light* Scene::createLight(glm::vec3 pos, float strength) {
+	m_lights.push_back(new Light(pos, strength));
     m_gameObjects.push_back(m_lights.back());
 	return m_lights.back();
 }

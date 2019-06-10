@@ -1,12 +1,10 @@
 #pragma once
-#include "GameObject.h"
 
 class GameObject;
 
 class Component {
-private:
-	GameObject* m_gameObject;
 public:
+	const GameObject* gameObject;
 	bool enabled = true;
 public:
 	Component() {}
@@ -15,9 +13,7 @@ public:
 	virtual void init() {}
 	virtual void start() {}
 	virtual void update() {}
-
-	inline GameObject* const getParentGameObject() const { return m_gameObject; }
 private:
-	void setParentGameObject(GameObject* gameObject) { m_gameObject = gameObject; }
+	void setParentGameObject(GameObject* gameObject) { this->gameObject = gameObject; }
 	friend class GameObject;
 };
