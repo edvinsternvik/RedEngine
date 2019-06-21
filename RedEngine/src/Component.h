@@ -4,16 +4,18 @@ class GameObject;
 
 class Component {
 public:
-	const GameObject* gameObject;
 	bool enabled = true;
+	GameObject* gameObject;
+
 public:
-	Component() {}
-	~Component() {}
+	Component();
 
 	virtual void init() {}
 	virtual void start() {}
 	virtual void update() {}
-private:
-	void setParentGameObject(GameObject* gameObject) { this->gameObject = gameObject; }
+	
+protected:
+	inline void setGameObject(GameObject* gameObject) { this->gameObject = gameObject; }
+
 	friend class GameObject;
 };

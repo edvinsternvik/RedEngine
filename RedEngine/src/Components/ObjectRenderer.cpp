@@ -1,5 +1,11 @@
 #include "Components/ObjectRenderer.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include "Scene.h"
+
+
+void ObjectRenderer::init() {
+	gameObject->scene->m_objectRenderers.push_back(this);
+}
 
 void ObjectRenderer::setModelMat(glm::vec3& position, glm::vec3& rotation, glm::vec3& scale) {
 	m_modelMat = glm::translate(glm::mat4(1.0f), position);

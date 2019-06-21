@@ -1,11 +1,9 @@
 #pragma once
-#include "Component.h"
+#include "Collider.h"
+#include <glm/glm.hpp>
 
-class CubeCollider : public Component{
+class CubeCollider : public Collider {
 public:
-    glm::vec3 offset, size, rotation;
-public:
-    CubeCollider();
     CubeCollider(glm::vec3 offset, glm::vec3 size, glm::vec3 rotation);
     ~CubeCollider();
 

@@ -7,6 +7,7 @@
 #include "Renderer.h"
 #include "Time.h"
 #include "Input.h"
+#include "PhysicsEngine/PhysicsEngine.h"
 
 class RedEngine {
 private:

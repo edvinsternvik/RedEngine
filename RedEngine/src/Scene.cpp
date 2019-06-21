@@ -27,27 +27,25 @@ void Scene::renderScene(Renderer* renderer) {
 }
 
 GameObject* Scene::createGameObject(glm::vec3 position) {
-    m_gameObjects.push_back(new GameObject(position, glm::vec3(0.0), glm::vec3(1.0)));
-    return m_gameObjects.back();
+	return createGameObject(position, glm::vec3(0.0f), glm::vec3(1.0f));
 }
 GameObject* Scene::createGameObject(glm::vec3 position, glm::vec3 rotation) {
-    m_gameObjects.push_back(new GameObject(position, rotation, glm::vec3(1.0)));
-    return m_gameObjects.back();
+	return createGameObject(position, rotation, glm::vec3(1.0f));
 }
 
 GameObject* Scene::createGameObject(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale) {
-    m_gameObjects.push_back(new GameObject(position, rotation, scale));
-    return m_gameObjects.back();
+	GameObject* go = new GameObject(position, rotation, scale);
+	go->scene = this;
+	m_gameObjects.push_back(go);
+	return m_gameObjects.back();
 }
 
 GameObject* Scene::createGameObject(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale, Model* model) {
-    m_gameObjects.push_back(new GameObject(position, rotation, scale));
+	GameObject* go = createGameObject(position, rotation, scale);
 
-    ObjectRenderer* objRenderer = new ObjectRenderer(model);
-    m_gameObjects.back()->addComponent(objRenderer);
-    m_objectRenderers.push_back(objRenderer);
+	go->addComponent(new ObjectRenderer(model));
 
-    return m_gameObjects.back();
+    return go;
 }
 
 Light* Scene::createLight(glm::vec3 pos, float strength) {

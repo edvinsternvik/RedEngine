@@ -1,13 +1,16 @@
 #pragma once
 #include "GameObject.h"
 #include "Renderer.h"
+#include "Components/Collider.h"
 #include "Debug.h"
 
 class Scene {
+public:
+	std::vector<Collider*> m_colliders;
+    std::vector<Light*> m_lights;
+    std::vector<ObjectRenderer*> m_objectRenderers;
 private:
     std::vector<GameObject*> m_gameObjects;
-    std::vector<ObjectRenderer*> m_objectRenderers;
-    std::vector<Light*> m_lights;
     Camera* m_camera = nullptr;
 public:
     Scene();

@@ -14,7 +14,7 @@ GameObject::~GameObject() {
 
 Component * GameObject::addComponent(Component * component) {
 	m_components.push_back(component);
-	component->setParentGameObject(this);
+	component->gameObject = this;
 	component->init();
 	component->start();
 	return component;

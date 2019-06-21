@@ -3,9 +3,12 @@
 #include <glm/glm.hpp>
 #include "Components/Transform.h"
 
+class Scene;
+
 class GameObject {
 public:
-	const Transform* transform;
+	Transform* transform;
+	Scene* scene;
 protected:
 	std::vector<Component*> m_components;
 public:

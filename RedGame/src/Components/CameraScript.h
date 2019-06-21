@@ -21,6 +21,7 @@ public:
 		if (Input::getKeyDown(GLFW_KEY_D)) transform->move(glm::vec3(speed, 0.0f, 0.0f));
 		if (Input::getKeyDown(GLFW_KEY_Q)) transform->move(glm::vec3(0.0f, -speed, 0.0f));
 		if (Input::getKeyDown(GLFW_KEY_E)) transform->move(glm::vec3(0.0f, speed, 0.0f));
+		
 
 		if (!Input::getCursorEnabled()) {
 			double xpos, ypos;
