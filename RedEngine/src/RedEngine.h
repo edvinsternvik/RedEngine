@@ -17,6 +17,7 @@ private:
 	SceneManager* m_sceneManager;
 	Time* m_time;
 	Input* m_input;
+	PhysicsEngine* m_physicsEngine;
 
 public:
 	RedEngine();

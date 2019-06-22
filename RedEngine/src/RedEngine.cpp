@@ -10,6 +10,7 @@ RedEngine::~RedEngine() {
 	delete m_renderer;
 	delete m_sceneManager;
 	delete m_time;
+	delete m_physicsEngine;
 }
 
 void RedEngine::init(int width, int height, const char* title) {
@@ -36,6 +37,8 @@ void RedEngine::init(int width, int height, const char* title) {
 	m_time = Time::Instantiate();
 	m_input = Input::instantiate();
 
+	m_physicsEngine = new PhysicsEngine();
+
 	start();
 
 	glClearColor(0.26f, 0.69f, 1.0f, 1.0f);
@@ -47,10 +50,14 @@ void RedEngine::loop() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		m_time->updateDeltaTime();
+
+		Scene* currentScene = m_sceneManager->getCurrentScene();
 		
 		update();
 
-		m_sceneManager->getCurrentScene()->updateObjects();
+		m_physicsEngine->updateRigidbodies(currentScene->m_rigidbodies, currentScene->m_colliders);
+
+		currentScene->updateObjects();
 
 		m_input->updateInput();
 

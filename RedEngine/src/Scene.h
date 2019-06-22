@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include "Renderer.h"
 #include "Components/Collider.h"
+#include "Components/Rigidbody.h"
 #include "Debug.h"
 
 class Scene {
@@ -9,6 +10,7 @@ public:
 	std::vector<Collider*> m_colliders;
     std::vector<Light*> m_lights;
     std::vector<ObjectRenderer*> m_objectRenderers;
+    std::vector<Rigidbody*> m_rigidbodies;
 private:
     std::vector<GameObject*> m_gameObjects;
     Camera* m_camera = nullptr;
