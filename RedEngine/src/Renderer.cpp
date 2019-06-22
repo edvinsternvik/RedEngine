@@ -30,8 +30,8 @@ void Renderer::updateLightPositions(std::vector<Light*>* lights) {
 	glm::vec3 lightPositionList[32];
 	float brightnessList[32];
 
-	for(int i = 0; i < lights->size(); ++i) {
-		lightPositionList[i] = (*lights)[i]->transform->position;
+	for(int i = 0; i < lights->size() && i < 32; ++i) {
+		lightPositionList[i] = (*lights)[i]->gameObject->transform->position;
 		brightnessList[i] = (*lights)[i]->brightness;
 	}
 

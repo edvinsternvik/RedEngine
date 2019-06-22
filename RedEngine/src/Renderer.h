@@ -1,7 +1,7 @@
 #pragma once
 #include "Shader.h"
 #include "Camera.h"
-#include "Light.h"
+#include "Components/Light.h"
 #include "Components/ObjectRenderer.h"
 
 class Renderer {

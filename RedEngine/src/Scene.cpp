@@ -37,7 +37,7 @@ GameObject* Scene::createGameObject(glm::vec3 position, glm::vec3 rotation, glm:
 	GameObject* go = new GameObject(position, rotation, scale);
 	go->scene = this;
 	m_gameObjects.push_back(go);
-	return m_gameObjects.back();
+	return go;
 }
 
 GameObject* Scene::createGameObject(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale, Model* model) {
@@ -49,9 +49,10 @@ GameObject* Scene::createGameObject(glm::vec3 position, glm::vec3 rotation, glm:
 }
 
 Light* Scene::createLight(glm::vec3 pos, float strength) {
-	m_lights.push_back(new Light(pos, strength));
-    m_gameObjects.push_back(m_lights.back());
-	return m_lights.back();
+    GameObject* lightObject = createGameObject(pos);
+    Component* light = lightObject->addComponent(new Light(strength));
+
+	return (Light*)light;
 }
 
 Camera* Scene::createCamera(glm::vec3 pos, glm::vec3 rot, CameraType cameraType, glm::vec2 windowSize) {
